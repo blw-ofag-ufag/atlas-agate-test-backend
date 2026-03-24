@@ -1,0 +1,71 @@
+name: backend workflow
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+  issues: write
+on:
+  workflow_call:
+    inputs:
+      semver-app-id:
+        description: "GitHub App ID used for semantic versioning, must have write permissions to the repo"
+        required: true
+        type: string
+      environment:
+        description: "Deployment environment used to resolve secrets (e.g., dev, int)"
+        required: true
+        type: string
+      aws-region:
+        type: string
+        required: true
+        description: "AWS region for deployment and AWS CLI commands"
+      ecr-repository-name:
+        type: string
+        required: true
+        description: "ECR repository name for pushing built images"
+      gitleaks-app-id:
+        description: "GitHub App ID used by gitleaks to authenticate with the GitHub API (must have read permissions to the repo and prs"
+        required: true
+        type: string
+    secrets:
+      SEMVER_PRIVATE_KEY:
+        description: "GitHub App private key matching the semantic-release-app-id input, used for semantic-release authentication"
+        required: true
+      AWS_OIDC_ROLE_ARN:
+        description: "OIDC role ARN for AWS credentials"
+        required: true
+      AWS_DEPLOYMENT_ROLE_ARN:
+        description: "Deployment role ARN for AWS credentials"
+        required: true
+      GH_ORG_GITLEAKS_PRIVATE_KEY:
+        description: "GitHub App private key matching the gitleaks-app-id input, used for gitleaks authentication"
+        required: true
+      LICENSE_KEY_GITLEAKS:
+        description: "Gitleaks license key"
+        required: true
+      SONAR_TOKEN:
+        description: "SonarQube authentication token"
+        required: true
+jobs:
+  semantic-release:
+    name: '.'
+    if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') }}
+    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/semantic_release.yml@v1.5.0
+    #needs: [ unit-test-sonarqube, vulnerability-scan ]
+    secrets:
+      GH_ORG_PRIVATE_KEY: ${{ secrets.SEMVER_PRIVATE_KEY}}
+    with:
+      app-id: ${{ inputs.semver-app-id}}
+  build-and-push:
+    name: '.'
+    if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') }}
+    uses: ./.github/workflows/backend_build_push_image.yml
+    needs: [ semantic-release ]
+    with:
+      aws-region: ${{ inputs.aws-region }}
+      ecr-repository-name:  ${{ inputs.ecr-repository-name }}
+      environment: ${{ inputs.environment }}
+      version: ${{needs.semantic-release.outputs.version }}
+    secrets:
+      AWS_OIDC_ROLE_ARN: ${{ secrets.AWS_OIDC_ROLE_ARN }}
+      AWS_DEPLOYMENT_ROLE_ARN: ${{ secrets.AWS_DEPLOYMENT_ROLE_ARN }}

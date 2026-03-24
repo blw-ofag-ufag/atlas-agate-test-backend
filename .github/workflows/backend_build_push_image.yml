@@ -1,0 +1,118 @@
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: true
+        description: "environment to deploy to, used for selecting correct AWS credentials and CloudFront distribution based on environment specific secrets and variables"
+      aws-region:
+        type: string
+        required: true
+        description: "AWS region for deployment and AWS CLI commands"
+      ecr-repository-name:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
+        description: "Version tag for the Docker image"
+    secrets:
+      AWS_OIDC_ROLE_ARN:
+        description: "OIDC role ARN for AWS credentials"
+        required: true
+      AWS_DEPLOYMENT_ROLE_ARN:
+        description: "Deployment role ARN for AWS credentials"
+        required: true
+    outputs:
+      image:
+        value: ${{ jobs.build-push-image.outputs.image }}
+
+jobs:
+  build-push-image:
+    name: Build and push docker image
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    timeout-minutes: 5
+    outputs:
+      image: ${{ steps.push-image.outputs.image }}
+    env:
+      AWS_REGION: ${{ inputs.aws-region }}
+      ECR_REPOSITORY: ${{inputs.ecr-repository-name}}
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Print GitHub Context Safely
+        run: |
+          echo "--- GitHub Context ---"
+          echo "${GITHUB_REPOSITORY}"
+          echo "${GITHUB_REF}"
+          echo "${GITHUB_SHA}"
+
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ format('v{0}', inputs.version) }}
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'corretto'
+
+      - name: Restore Maven Cache
+        uses: actions/cache/restore@v5
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Maven package
+        run: mvn -B clean package -DskipTests -T 1C
+
+      - name: Set image tag to GITHUB_ENV
+        run: echo "IMAGE_TAG=${{ inputs.version }}" >> $GITHUB_ENV
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v5
+        with:
+          role-to-assume: ${{ secrets.AWS_OIDC_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # activate once blueprint is ready
+#      - name: Assume deployment role
+#        uses: aws-actions/configure-aws-credentials@v4
+#        with:
+#          role-to-assume: ${{ secrets.AWS_DEPLOYMENT_ROLE_ARN }}
+#          aws-region: ${{ env.AWS_REGION }}
+#          role-chaining: true
+#          role-skip-session-tagging: true
+
+      - name: Login to AWS ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Generate Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}
+          tags: |
+            type=raw,value=${{ needs.release-check.outputs.version }}
+            type=sha
+
+      - name: Build and push to ECR
+        id: build
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          # Caching makes subsequent builds much faster
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          provenance: false
+          sbom: true
