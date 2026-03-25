@@ -46,7 +46,28 @@ on:
       SONAR_TOKEN:
         description: "SonarQube authentication token"
         required: true
+      NIST_OWASP_API_KEY:
+        description: "API Key for the national vulnerability database used by OWASP Dependency Check"
+        required: true
 jobs:
+  checkstyle:
+    name: "."
+    uses: ./.github/workflows/backend_checkstyle.yml
+    secrets: inherit
+  gitleaks:
+    name: '.'
+    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/gitleaks.yml@v1.5.1
+    secrets:
+      GH_ORG_GITLEAKS_PRIVATE_KEY: ${{ secrets.GH_ORG_GITLEAKS_PRIVATE_KEY }}
+      LICENSE_KEY_GITLEAKS: ${{ secrets.LICENSE_KEY_GITLEAKS }}
+    with:
+      gitleaks-app-id: ${{ inputs.gitleaks-app-id }}
+  owasp-dependency-check:
+    name: "."
+    uses: ./.github/workflows/backend_owasp_dependency_check.yml
+    needs: [ checkstyle, gitleaks ]
+    secrets:
+      NIST_OWASP_API_KEY: ${{ secrets.NIST_OWASP_API_KEY }}
   semantic-release:
     name: '.'
     if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') }}
