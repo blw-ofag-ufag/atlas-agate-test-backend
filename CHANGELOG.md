@@ -1,3 +1,9 @@
+## [1.0.2](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.1...v1.0.2) (2026-03-25)
+
+### Bug Fixes
+
+* **version:** uses tag to version ecr image ([262cd1d](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/262cd1dbcb1aa2c2f6a542bb60f81bddd90b086f))
+
 ## [1.0.1](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0...v1.0.1) (2026-03-25)
 
 ### Bug Fixes
