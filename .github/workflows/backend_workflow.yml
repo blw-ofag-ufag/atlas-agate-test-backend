@@ -50,7 +50,7 @@ jobs:
   semantic-release:
     name: '.'
     if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') }}
-    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/semantic_release.yml@v1.5.0
+    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/semantic_release.yml@v1.5.1
     #needs: [ unit-test-sonarqube, vulnerability-scan ]
     secrets:
       GH_ORG_PRIVATE_KEY: ${{ secrets.SEMVER_PRIVATE_KEY}}
