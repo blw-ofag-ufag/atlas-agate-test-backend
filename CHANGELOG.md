@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0...v1.0.1) (2026-03-25)
+
+### Bug Fixes
+
+* **pipeline:** adds qemu / ecr login ([8da5497](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/8da549720288f7114daaa061dd0aa76a30778ac6))
+
 ## 1.0.0 (2026-03-25)
 
 ### Features
