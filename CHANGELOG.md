@@ -1,3 +1,10 @@
+## [1.1.0](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.2...v1.1.0) (2026-03-30)
+
+### Features
+
+* **gh-analytics:** adds checkstyle & owasp checks ([145a79a](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/145a79a66ff7ba98a8f2956a6886a2b96c529049))
+* **gh-analytics:** adds vuln checks ([f4dc414](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/f4dc41445edf34649df6c67308fc543fd1261b67))
+
 ## [1.0.2](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.1...v1.0.2) (2026-03-25)
 
 ### Bug Fixes
