@@ -1,4 +1,4 @@
-name: "frontend default workflow"
+name: "backend default workflow"
 
 permissions:
   contents: write
@@ -31,29 +31,12 @@ jobs:
           else
             echo "unable to set environment for ref ${GITHUB_REF}"
           fi
-  # resolves environment specific variables like s3 bucket name or cloudfront distribution id and sets them as output for the rest of the workflow.
-  # this would not be needed if we would use the vars in the called workflows directly without exposing them as inputs (but we want to document needed variables and their purpose in the workflow inputs and not rely on implicit usage of vars in the called workflows)
-  resolve-env-vars:
-    runs-on: ubuntu-latest
-    needs: set-env
-    environment: ${{ needs.set-env.outputs.environment }}
-    outputs:
-      frontend_s3_bucket: ${{ steps.out.outputs.frontend_s3_bucket }}
-      cloudfront_distribution_id: ${{ steps.out.outputs.cloudfront_distribution_id }}
-      aws_region: ${{ steps.out.outputs.aws_region }}
-    steps:
-      - id: out
-        run: |
-          echo "resolving environment specific variables for environment ${{ needs.set-env.outputs.environment }}"
-          echo "frontend_s3_bucket=${{ vars.FRONTEND_S3_BUCKET }}"
-          echo "frontend_s3_bucket=${{ vars.FRONTEND_S3_BUCKET }}" >> "$GITHUB_OUTPUT"
-          echo "cloudfront_distribution_id=${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}"
-          echo "cloudfront_distribution_id=${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}" >> "$GITHUB_OUTPUT"
+
 
   backend-workflow:
     name: "."
     uses: ./.github/workflows/backend_workflow.yml
-    needs: [set-env, resolve-env-vars]
+    needs: [set-env]
     secrets:
       GH_ORG_GITLEAKS_PRIVATE_KEY: ${{ secrets.GH_ORG_GITLEAKS_PRIVATE_KEY }}
       LICENSE_KEY_GITLEAKS: ${{ secrets.LICENSE_KEY_GITLEAKS }}
@@ -61,6 +44,7 @@ jobs:
       AWS_OIDC_ROLE_ARN: ${{ secrets.AWS_OIDC_ROLE_ARN }}
       AWS_DEPLOYMENT_ROLE_ARN: ${{ secrets.AWS_DEPLOYMENT_ROLE_ARN }}
       SEMVER_PRIVATE_KEY: ${{secrets.SEMVER_PRIVATE_KEY}}
+      NIST_OWASP_API_KEY: ${{ secrets.NIST_OWASP_API_KEY }}
     with:
       environment: ${{ needs.set-env.outputs.environment }}
       semver-app-id: ${{vars.SEMVER_APP_ID}}

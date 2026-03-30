@@ -1,11 +1,14 @@
 on:
   workflow_call:
-
+    secrets:
+      SONAR_TOKEN:
+        description: "SonarQube authentication token"
+        required: true
 jobs:
-  checkstyle:
-    name: Checkstyle
+  unit-test-sonarqube:
+    name: Unit Tests and SonarQube
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -26,8 +29,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Run Checkstyle
-        run: mvn checkstyle:check
+      - name: Run Unit Tests
+        run: mvn -B test -T 1C
+
+      - name: Run SonarQube Analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          mvn -T 1C sonar:sonar -Dsonar.coverage.jacoco.xmlReportPaths=target/jacoco-report/jacoco.xml
 
       - name: Save Maven Cache
         uses: actions/cache/save@v5

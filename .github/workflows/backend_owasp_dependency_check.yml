@@ -8,7 +8,7 @@ jobs:
   owasp-dependency-check:
     name: OWASP Dependency Check
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 100
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -27,6 +27,12 @@ jobs:
           echo "date=$(/bin/date -u "+%Y%m%d")" >> $GITHUB_OUTPUT
         shell: bash
 
+      - name: check NIST key length
+        env:
+          NIST_OWASP_API_KEY: ${{ secrets.NIST_OWASP_API_KEY }}
+        run: |
+          echo "Key length: ${#NIST_OWASP_API_KEY}"
+
       - name: Restore Maven Cache
         uses: actions/cache/restore@v5
         with:
@@ -37,11 +43,17 @@ jobs:
             ${{ runner.os }}-owasp-${{ steps.get-cache-date.outputs.date }}
             ${{ runner.os }}-owasp-
 
+
+
       - name: Run OWASP Dependency Check
         run: |
           mvn org.owasp:dependency-check-maven:check \
             -DossindexAnalyzerEnabled=false \
-            -DnvdApiKey=${{ secrets.NIST_OWASP_API_KEY }} 
+            -DnvdApiKey=${{ secrets.NIST_OWASP_API_KEY }} \
+            -DossindexAnalyzerEnabled=false \
+            -DpnpmAuditAnalyzerEnabled=false \
+            -DnodeAuditAnalyzerEnabled=false \
+            -DyarnAuditAnalyzerEnabled=false
 
       - name: Save Maven Cache
         uses: actions/cache/save@v5

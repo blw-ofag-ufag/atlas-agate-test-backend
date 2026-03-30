@@ -48,7 +48,12 @@ jobs:
           echo "${GITHUB_REPOSITORY}"
           echo "${GITHUB_REF}"
           echo "${GITHUB_SHA}"
-
+      - name: Validate deployment inputs
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          [[ "$VERSION" =~ ^[0-9]+(\.[0-9]+){2}([.-][0-9A-Za-z]+)*$ ]] || { echo "Invalid version"; exit 1; }
       - name: Checkout
         uses: actions/checkout@v6
         with:
@@ -72,10 +77,10 @@ jobs:
         run: mvn -B clean package -DskipTests -T 1C
 
       - name: Set image tag to GITHUB_ENV
-        run: echo "IMAGE_TAG=${{ inputs.version }}" >> $GITHUB_ENV
+        run: echo "IMAGE_TAG=${VERSION}" >> $GITHUB_ENV
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v5
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: ${{ secrets.AWS_OIDC_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
@@ -94,18 +99,18 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
 
       - name: Generate Docker metadata
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}
           tags: |
-            type=raw,value=${{ inputs.version }}
+            type=raw,value=${{ env.version }}
             type=sha
 
       - name: Build and push to ECR

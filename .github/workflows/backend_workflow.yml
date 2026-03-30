@@ -53,7 +53,7 @@ jobs:
   checkstyle:
     name: "."
     uses: ./.github/workflows/backend_checkstyle.yml
-    secrets: inherit
+
   gitleaks:
     name: '.'
     uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/gitleaks.yml@v1.5.1
@@ -62,14 +62,29 @@ jobs:
       LICENSE_KEY_GITLEAKS: ${{ secrets.LICENSE_KEY_GITLEAKS }}
     with:
       gitleaks-app-id: ${{ inputs.gitleaks-app-id }}
+
   owasp-dependency-check:
     name: "."
     uses: ./.github/workflows/backend_owasp_dependency_check.yml
     needs: [ checkstyle, gitleaks ]
     secrets:
       NIST_OWASP_API_KEY: ${{ secrets.NIST_OWASP_API_KEY }}
+
+  unit-test-sonarqube:
+    name: "."
+    uses: ./.github/workflows/backend_unit_test_sonarqube.yml
+    needs: [ checkstyle, gitleaks ]
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  trivy-image-scan:
+    name: "."
+    uses: ./.github/workflows/trivy_scan.yml
+    needs: [ checkstyle, gitleaks ]
+
   semantic-release:
     name: '.'
+    needs: [ checkstyle,gitleaks, owasp-dependency-check, unit-test-sonarqube, trivy-image-scan ]
     if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') }}
     uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/semantic_release.yml@v1.5.1
     #needs: [ unit-test-sonarqube, vulnerability-scan ]
@@ -77,6 +92,7 @@ jobs:
       GH_ORG_PRIVATE_KEY: ${{ secrets.SEMVER_PRIVATE_KEY}}
     with:
       app-id: ${{ inputs.semver-app-id}}
+
   build-and-push:
     name: '.'
     if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') }}
@@ -84,7 +100,7 @@ jobs:
     needs: [ semantic-release ]
     with:
       aws-region: ${{ inputs.aws-region }}
-      ecr-repository-name:  ${{ inputs.ecr-repository-name }}
+      ecr-repository-name: ${{ inputs.ecr-repository-name }}
       environment: ${{ inputs.environment }}
       version: ${{needs.semantic-release.outputs.version }}
     secrets:

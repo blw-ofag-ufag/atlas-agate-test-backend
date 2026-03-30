@@ -1,8 +1,6 @@
-# code-with-quarkus
+# Agate Test Backend
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
-
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+This project is used to simulate backends that will use or validate agate tokens.
 
 ## Running the application in dev mode
 
@@ -13,6 +11,11 @@ You can run your application in dev mode that enables live coding using:
 ```
 
 > **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8900/q/dev/>.
+
+## Checkstyle
+make sure to add the checkstyle plugin and import checkstyle configuration in your IDE to avoid checkstyle errors when pushing code. The checkstyle configuration file is located at `checkstyle.xml` in the root of the repository.
+
+Make sure to exclude sql scripts in checkstyle settings like this: *.{sql}
 
 ## Semantic versioning
 Semantic versioning requires 
