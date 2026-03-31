@@ -54,6 +54,7 @@ jobs:
         run: |
           set -euo pipefail
           [[ "$VERSION" =~ ^[0-9]+(\.[0-9]+){2}([.-][0-9A-Za-z]+)*$ ]] || { echo "Invalid version"; exit 1; }
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
       - name: Checkout
         uses: actions/checkout@v6
         with:
@@ -86,13 +87,13 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       # activate once blueprint is ready
-#      - name: Assume deployment role
-#        uses: aws-actions/configure-aws-credentials@v4
-#        with:
-#          role-to-assume: ${{ secrets.AWS_DEPLOYMENT_ROLE_ARN }}
-#          aws-region: ${{ env.AWS_REGION }}
-#          role-chaining: true
-#          role-skip-session-tagging: true
+      #      - name: Assume deployment role
+      #        uses: aws-actions/configure-aws-credentials@v4
+      #        with:
+      #          role-to-assume: ${{ secrets.AWS_DEPLOYMENT_ROLE_ARN }}
+      #          aws-region: ${{ env.AWS_REGION }}
+      #          role-chaining: true
+      #          role-skip-session-tagging: true
 
       - name: Login to AWS ECR
         id: login-ecr
@@ -110,7 +111,7 @@ jobs:
         with:
           images: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}
           tags: |
-            type=raw,value=${{ env.version }}
+            type=raw,value=${{ env.VERSION  }}
             type=sha
 
       - name: Build and push to ECR
@@ -127,3 +128,4 @@ jobs:
           cache-to: type=gha,mode=max
           provenance: false
           sbom: true
+

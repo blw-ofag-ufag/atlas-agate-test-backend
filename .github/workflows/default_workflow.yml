@@ -8,11 +8,11 @@ permissions:
 
 on:
   pull_request:
-    branches: [main, develop]
+    branches: [ main, develop ]
   push:
-    branches: [main, develop]
+    branches: [ main, develop ]
   merge_group:
-    branches: [main, develop]
+    branches: [ main, develop ]
 jobs:
   # maps the branch to an environment and sets it as output for the rest of the workflow
   set-env:
@@ -36,7 +36,7 @@ jobs:
   backend-workflow:
     name: "."
     uses: ./.github/workflows/backend_workflow.yml
-    needs: [set-env]
+    needs: [ set-env ]
     secrets:
       GH_ORG_GITLEAKS_PRIVATE_KEY: ${{ secrets.GH_ORG_GITLEAKS_PRIVATE_KEY }}
       LICENSE_KEY_GITLEAKS: ${{ secrets.LICENSE_KEY_GITLEAKS }}
@@ -45,9 +45,13 @@ jobs:
       AWS_DEPLOYMENT_ROLE_ARN: ${{ secrets.AWS_DEPLOYMENT_ROLE_ARN }}
       SEMVER_PRIVATE_KEY: ${{secrets.SEMVER_PRIVATE_KEY}}
       NIST_OWASP_API_KEY: ${{ secrets.NIST_OWASP_API_KEY }}
+      DEPLOYMENT_APP_PRIVATE_KEY: ${{ secrets.PC_CORE_BLW_AGATE_DEV_DEPLOY_PRIVATE_KEY }}
     with:
       environment: ${{ needs.set-env.outputs.environment }}
       semver-app-id: ${{vars.SEMVER_APP_ID}}
       gitleaks-app-id: ${{ vars.GH_ORG_GITLEAKS_APP_ID }}
       aws-region: ${{ vars.AWS_REGION }}
       ecr-repository-name: 'agate-test-backend'
+      deployment-app-id: ${{ vars.PC_CORE_BLW_AGATE_DEV_DEPLOY_APP_ID}}
+      application-name: 'agate-test-backend'
+      infrastructure_repo: 'blw-ofag-ufag/pc-core-blw-agate-dev'

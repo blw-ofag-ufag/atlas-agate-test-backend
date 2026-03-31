@@ -1,0 +1,154 @@
+name: "Update Infrastructure"
+
+on:
+  workflow_call:
+    inputs:
+      image_tag:
+        description: 'Docker image tag to deploy'
+        required: true
+        type: string
+      application_name:
+        description: 'Application name in terraform.auto.tfvars.json'
+        required: true
+        type: string
+      infrastructure_repo:
+        description: 'Infrastructure repository'
+        required: true
+        type: string
+      tfvars_path:
+        description: 'Path to terraform.auto.tfvars.json'
+        required: false
+        default: 'terraform/terraform.auto.tfvars.json'
+        type: string
+      base_branch:
+        description: 'Base branch for PR'
+        required: false
+        default: 'main'
+        type: string
+      app-id:
+        description: "GitHub App ID with write permissions to the infrastructure repository, used to create a token for authentication when pushing changes and creating the PR"
+        required: true
+        type: string
+    secrets:
+      GH_APP_PRIVATE_KEY:
+        required: true
+        description: 'GitHub App Private Key for authentication'
+
+jobs:
+  update-infrastructure:
+    name: Update Infrastructure Configuration
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/create-github-app-token@v3
+        id: app-token
+        env:
+          GH_APP_ID: ${{ inputs.app-id }}
+          GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
+        with:
+          app-id: ${{ env.GH_APP_ID }}
+          private-key: ${{ env.GH_APP_PRIVATE_KEY }}
+          repositories: ${{ inputs.infrastructure_repo }}
+
+      - name: Checkout infrastructure repository
+        uses: actions/checkout@v6
+        with:
+          repository: ${{ inputs.infrastructure_repo }}
+          token: ${{ steps.app-token.outputs.token }}
+          path: infrastructure
+          ref: ${{ inputs.base_branch }}
+
+      - name: Update image tag in terraform.auto.tfvars.json
+        id: update-config
+        run: |
+          cd infrastructure
+          
+          # Extract just the version tag (remove registry/repo prefix if present)
+          IMAGE_TAG="${{ inputs.image_tag }}"
+          VERSION_TAG=$(echo "$IMAGE_TAG" | sed 's/.*://')
+          
+          echo "Updating ${{ inputs.application_name }} to version $VERSION_TAG"
+          
+          # Update the image_tag for the specified application
+          jq --arg app "${{ inputs.application_name }}-version" \
+          --arg tag "$VERSION_TAG" \
+          '.[$app] = $tag' \
+          "${{ inputs.tfvars_path }}" > temp.json && \
+          mv temp.json "${{ inputs.tfvars_path }}"
+          
+          # Get the current timestamp for TRIGGER_REDEPLOY_AT
+          TIMESTAMP=$(date +"%Y-%m-%d-%H%M")
+          
+          # Update TRIGGER_REDEPLOY_AT timestamp to force redeployment
+          #          jq --arg app "${{ inputs.application_name }}" \
+          #             --arg ts "$TIMESTAMP" \
+          #             '(.applications[] | select(.name == $app).environment.TRIGGER_REDEPLOY_AT) = $ts' \
+          #             "${{ inputs.tfvars_path }}" > temp.json && \
+          #          mv temp.json "${{ inputs.tfvars_path }}"
+
+          # Format the JSON file
+          jq '.' "${{ inputs.tfvars_path }}" > temp.json && mv temp.json "${{ inputs.tfvars_path }}"
+
+          # Check if there are actual changes
+          if git diff --quiet; then
+          echo "No changes detected"
+          echo "changes=false" >> $GITHUB_OUTPUT
+          else
+          echo "Changes detected"
+          echo "changes=true" >> $GITHUB_OUTPUT
+          echo "version_tag=$VERSION_TAG" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request with GitHub CLI
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          GH_USER: ${{ inputs.app-id}}
+        run: |
+          cd infrastructure
+
+          # Set branch name
+          BRANCH_NAME="update-${{ inputs.application_name }}-${{ steps.update-config.outputs.version_tag }}-${{ github.run_id }}"
+
+          # Configure git
+          git config user.name "github-actions[bot]"
+          git config user.email "$GH_USER+github-actions[bot]@users.noreply.github.com"
+
+          # Create and switch to new branch
+          git checkout -b "$BRANCH_NAME"
+
+          # Stage and commit changes
+          git add "${{ inputs.tfvars_path }}"
+          git commit -m "chore: update ${{ inputs.application_name }} to ${{ steps.update-config.outputs.version_tag }}
+
+          Automated deployment update from CI/CD pipeline
+          Source: ${{ github.repository }}#${{ github.run_id }}"
+
+          # Push branch
+          git push origin "$BRANCH_NAME"
+
+          # Create pull request using GitHub CLI
+          gh pr create \
+            --title "Deploy: ${{ inputs.application_name }} ${{ steps.update-config.outputs.version_tag }}" \
+            --body "## 🚀 Automated Deployment Update
+
+          This PR updates the deployment configuration for **${{ inputs.application_name }}** to version \`${{ steps.update-config.outputs.version_tag }}\`.
+
+          ### Changes
+          - Updated \`image_tag\` to \`${{ steps.update-config.outputs.version_tag }}\`
+          - Updated \`TRIGGER_REDEPLOY_AT\` timestamp to force ECS redeployment
+
+          ### Source
+          - Repository: [\`${{ github.repository }}\`](${{ github.server_url }}/${{ github.repository }})
+          - Workflow Run: [\`#${{ github.run_id }}\`](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          - Commit: [\`${{ github.sha }}\`](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})
+
+          ### Next Steps
+          1. Review the changes
+          2. Approve and merge to trigger Terraform deployment
+          3. Monitor the ECS deployment in AWS Console
+
+          ---
+          *This PR was automatically created by the CI/CD pipeline*" \
+            --base "${{ inputs.base_branch }}" \
+            --head "$BRANCH_NAME" \
+            --label "deployment,automated,infrastructure"

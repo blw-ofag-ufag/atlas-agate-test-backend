@@ -27,6 +27,23 @@ on:
         description: "GitHub App ID used by gitleaks to authenticate with the GitHub API (must have read permissions to the repo and prs"
         required: true
         type: string
+      deployment-app-id:
+        description: "GitHub App ID used for deployment authentication, must have permissions to create PRs on the infrastructure repository"
+        required: true
+        type: string
+      application-name:
+        description: "Name of the application being built and deployed, used for tagging docker images and identifying the correct infrastructure as code to update in the infrastructure repository"
+        required: true
+        type: string
+      infrastructure_repo:
+        description: 'Name Infrastructure repository'
+        required: true
+        type: string
+      infrastructure_base_branch:
+        description: 'Base branch for PR'
+        required: false
+        default: 'main'
+        type: string
     secrets:
       SEMVER_PRIVATE_KEY:
         description: "GitHub App private key matching the semantic-release-app-id input, used for semantic-release authentication"
@@ -48,6 +65,9 @@ on:
         required: true
       NIST_OWASP_API_KEY:
         description: "API Key for the national vulnerability database used by OWASP Dependency Check"
+        required: true
+      DEPLOYMENT_APP_PRIVATE_KEY:
+        description: "GitHub App private key matching the deployment-app-id input, used for deployment authentication and creating PRs on the infrastructure repository"
         required: true
 jobs:
   checkstyle:
@@ -106,3 +126,18 @@ jobs:
     secrets:
       AWS_OIDC_ROLE_ARN: ${{ secrets.AWS_OIDC_ROLE_ARN }}
       AWS_DEPLOYMENT_ROLE_ARN: ${{ secrets.AWS_DEPLOYMENT_ROLE_ARN }}
+
+  update-infrastructure:
+    name: Update Infrastructure
+    needs: [ semantic-release, build-and-push ]
+    if: needs.build-and-push.result == 'success'
+    uses: ./.github/workflows/update_infrastructure.yml
+    with:
+      image_tag: ${{ needs.release-check.outputs.version }}
+      application_name: ${{inputs.application-name}}
+      infrastructure_repo: ${{inputs.infrastructure_repo}}
+      tfvars_path: 'terraform/terraform.auto.tfvars.json'
+      base_branch: ${{inputs.infrastructure_base_branch}}
+      app-id: ${{inputs.deployment-app-id}}
+    secrets:
+      GH_APP_PRIVATE_KEY: ${{ secrets.SEMVER_PRIVATE_KEY }}
