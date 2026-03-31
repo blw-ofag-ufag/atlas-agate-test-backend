@@ -1,3 +1,9 @@
+## [1.2.1](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.0...v1.2.1) (2026-03-31)
+
+### Bug Fixes
+
+* **semantic-versioning:** try to fix semantic versioning by pinning version ([17bf6e9](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/17bf6e911abf8f8fdbb299f0bfe87f35abbc9677))
+
 ## [1.2.0](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.1.0...v1.2.0) (2026-03-31)
 
 ### Features
