@@ -1,3 +1,9 @@
+## [1.2.2](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.1...v1.2.2) (2026-03-31)
+
+### Bug Fixes
+
+* **deploy:** adds correct credentials ([e3f3cbf](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/e3f3cbfc1f5711eb36f802fed48df6f1039ab109))
+
 ## [1.2.1](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.0...v1.2.1) (2026-03-31)
 
 ### Bug Fixes
