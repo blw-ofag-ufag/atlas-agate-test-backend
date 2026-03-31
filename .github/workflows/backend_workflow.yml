@@ -141,4 +141,4 @@ jobs:
       base_branch: ${{inputs.infrastructure_base_branch}}
       app-id: ${{inputs.deployment-app-id}}
     secrets:
-      GH_APP_PRIVATE_KEY: ${{ secrets.SEMVER_PRIVATE_KEY }}
+      GH_APP_PRIVATE_KEY: ${{ secrets.DEPLOYMENT_APP_PRIVATE_KEY }}
