@@ -1,3 +1,13 @@
+## [1.2.0](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.1.0...v1.2.0) (2026-03-31)
+
+### Features
+
+* **deployment:** adds deplyoment step ([b46618b](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/b46618b711861bad4b20432330af9a16be3041a8))
+
+### Bug Fixes
+
+* **semantic-versioning:** try to fix semantic versioning by pinning version ([60f1a2b](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/60f1a2b43edc719dd5eadafb78fe2ba4d41146f5))
+
 ## [1.1.0](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.2...v1.1.0) (2026-03-30)
 
 ### Features
