@@ -106,8 +106,9 @@ jobs:
     name: '.'
     needs: [ checkstyle,gitleaks, owasp-dependency-check, unit-test-sonarqube, trivy-image-scan ]
     if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') }}
-    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/semantic_release.yml@v1.5.1
+    #uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/semantic_release.yml@v1.5.1
     #needs: [ unit-test-sonarqube, vulnerability-scan ]
+    uses: ./.github/workflows/semantic_release.yml
     secrets:
       GH_ORG_PRIVATE_KEY: ${{ secrets.SEMVER_PRIVATE_KEY}}
     with:
