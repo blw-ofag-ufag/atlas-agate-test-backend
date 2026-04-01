@@ -138,7 +138,7 @@ jobs:
     if: needs.build-and-push.result == 'success'
     uses: ./.github/workflows/update_infrastructure.yml
     with:
-      image_tag: ${{ needs.release-check.outputs.version }}
+      image_tag: ${{ needs.semantic-release.outputs.version }}
       application_name: ${{inputs.application-name}}
       infrastructure_repo: ${{inputs.infrastructure_repo}}
       tfvars_path: 'terraform/terraform.tfvars.json'

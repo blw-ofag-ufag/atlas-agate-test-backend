@@ -67,6 +67,7 @@ jobs:
         run: |
           cd infrastructure
           
+          echo "extracting version tag from image tag ${{ inputs.image_tag }}"
           # Extract just the version tag (remove registry/repo prefix if present)
           IMAGE_TAG="${{ inputs.image_tag }}"
           VERSION_TAG=$(echo "$IMAGE_TAG" | sed 's/.*://')
@@ -154,5 +155,5 @@ jobs:
           ---
           *This PR was automatically created by the CI/CD pipeline*" \
             --base "${{ inputs.base_branch }}" \
-            --head "$BRANCH_NAME" \
-            --label "deployment,automated,infrastructure"
+            --head "$BRANCH_NAME"
+          #   --label "deployment,automated,infrastructure"
