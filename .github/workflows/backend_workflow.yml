@@ -35,6 +35,10 @@ on:
         description: "Name of the application being built and deployed, used for tagging docker images and identifying the correct infrastructure as code to update in the infrastructure repository"
         required: true
         type: string
+      github-organization:
+        description: 'GitHub organization that owns the infrastructure repository'
+        required: true
+        type: string
       infrastructure_repo:
         description: 'Name Infrastructure repository'
         required: true
@@ -140,5 +144,6 @@ jobs:
       tfvars_path: 'terraform/terraform.auto.tfvars.json'
       base_branch: ${{inputs.infrastructure_base_branch}}
       app-id: ${{inputs.deployment-app-id}}
+      github-organization: 'blw-ofag-ufag'
     secrets:
       GH_APP_PRIVATE_KEY: ${{ secrets.DEPLOYMENT_APP_PRIVATE_KEY }}

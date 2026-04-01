@@ -11,6 +11,10 @@ on:
         description: 'Application name in terraform.auto.tfvars.json'
         required: true
         type: string
+      github-organization:
+        description: 'GitHub organization that owns the infrastructure repository'
+        required: true
+        type: string
       infrastructure_repo:
         description: 'Infrastructure repository'
         required: true
@@ -48,12 +52,12 @@ jobs:
         with:
           app-id: ${{ env.GH_APP_ID }}
           private-key: ${{ env.GH_APP_PRIVATE_KEY }}
-        #  repositories: ${{ inputs.infrastructure_repo }}
+          repositories: ${{ inputs.infrastructure_repo }}
 
       - name: Checkout infrastructure repository
         uses: actions/checkout@v6
         with:
-          repository: ${{ inputs.infrastructure_repo }}
+          repository: "${{inputs.github-organization}}/${{ inputs.infrastructure_repo }}"
           token: ${{ steps.app-token.outputs.token }}
           path: infrastructure
           ref: ${{ inputs.base_branch }}

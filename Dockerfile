@@ -13,4 +13,4 @@ USER 185
 ENV JAVA_OPTS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
 ENV JAVA_APP_JAR="/deployments/quarkus-run.jar"
 
-ENTRYPOINT ["sh", "java $JAVA_OPTS -jar $JAVA_APP_JAR"]
+ENTRYPOINT ["sh","-c", "java $JAVA_OPTS -jar $JAVA_APP_JAR"]

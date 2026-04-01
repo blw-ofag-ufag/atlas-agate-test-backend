@@ -54,4 +54,5 @@ jobs:
       ecr-repository-name: 'agate-test-backend'
       deployment-app-id: ${{ vars.PC_CORE_BLW_AGATE_DEV_DEPLOY_APP_ID}}
       application-name: 'agate-test-backend'
-      infrastructure_repo: 'blw-ofag-ufag/pc-core-blw-agate-dev'
+      infrastructure_repo: 'pc-core-blw-agate-dev'
+      github-organization: 'blw-ofag-ufag'
