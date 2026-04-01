@@ -1,3 +1,9 @@
+## [1.2.6](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.5...v1.2.6) (2026-04-01)
+
+### Bug Fixes
+
+* **deployment:** adds gh org input ([5063524](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/5063524a3f8f0d6f6d566e9ea2d908d5bba9dd7c))
+
 ## [1.2.5](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.4...v1.2.5) (2026-04-01)
 
 ### Bug Fixes
