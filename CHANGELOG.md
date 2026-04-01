@@ -1,3 +1,9 @@
+## [1.2.3](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.2...v1.2.3) (2026-04-01)
+
+### Bug Fixes
+
+* **deploy:** uses full repository name including org ([c282113](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/c282113ac9336199d273fe1346a53ace0ead9dcf))
+
 ## [1.2.2](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.1...v1.2.2) (2026-03-31)
 
 ### Bug Fixes
