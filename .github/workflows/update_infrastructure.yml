@@ -48,7 +48,7 @@ jobs:
         with:
           app-id: ${{ env.GH_APP_ID }}
           private-key: ${{ env.GH_APP_PRIVATE_KEY }}
-          repositories: ${{ inputs.infrastructure_repo }}
+        #  repositories: ${{ inputs.infrastructure_repo }}
 
       - name: Checkout infrastructure repository
         uses: actions/checkout@v6
