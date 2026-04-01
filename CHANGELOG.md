@@ -1,3 +1,9 @@
+## [1.2.8](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.7...v1.2.8) (2026-04-01)
+
+### Bug Fixes
+
+* **deployment:** fix pr ([bdf3d21](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/bdf3d217c8dd638a7ce1f037cb475caf7e0f84db))
+
 ## [1.2.7](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.6...v1.2.7) (2026-04-01)
 
 ### Bug Fixes
