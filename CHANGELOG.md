@@ -1,3 +1,9 @@
+## [1.2.9](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.8...v1.2.9) (2026-04-01)
+
+### Bug Fixes
+
+* autovars file ([6311cc8](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/6311cc880613158d07545a99983d33cc16f8ccb4))
+
 ## [1.2.8](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.7...v1.2.8) (2026-04-01)
 
 ### Bug Fixes
