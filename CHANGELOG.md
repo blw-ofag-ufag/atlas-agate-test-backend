@@ -1,3 +1,9 @@
+## [1.2.7](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.6...v1.2.7) (2026-04-01)
+
+### Bug Fixes
+
+* **deployment:** fix tf vars ([145e08a](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/145e08aca31723350fe5ef0d2f3517b02d52337a))
+
 ## [1.2.6](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.5...v1.2.6) (2026-04-01)
 
 ### Bug Fixes
