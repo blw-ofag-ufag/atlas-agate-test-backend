@@ -51,7 +51,7 @@ jobs:
       semver-app-id: ${{vars.SEMVER_APP_ID}}
       gitleaks-app-id: ${{ vars.GH_ORG_GITLEAKS_APP_ID }}
       aws-region: ${{ vars.AWS_REGION }}
-      ecr-repository-name: 'agate-test-backend'
+      ecr-repository-name: 'blw-ofag-ufag/agate-test-backend'
       deployment-app-id: ${{ vars.PC_CORE_BLW_AGATE_DEV_DEPLOY_APP_ID}}
       application-name: 'agate-test-backend'
       infrastructure_repo: 'pc-core-blw-agate-dev'
