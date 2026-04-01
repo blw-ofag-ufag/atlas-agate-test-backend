@@ -1,3 +1,9 @@
+## [1.2.5](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.4...v1.2.5) (2026-04-01)
+
+### Bug Fixes
+
+* **deployment:** fixes repository path ([ccddc4d](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/ccddc4d3376338f6b9163d4b190131508003e663))
+
 ## [1.2.4](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.3...v1.2.4) (2026-04-01)
 
 ### Bug Fixes
