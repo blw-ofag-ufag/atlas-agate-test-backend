@@ -141,7 +141,7 @@ jobs:
       image_tag: ${{ needs.release-check.outputs.version }}
       application_name: ${{inputs.application-name}}
       infrastructure_repo: ${{inputs.infrastructure_repo}}
-      tfvars_path: 'terraform/terraform.auto.tfvars.json'
+      tfvars_path: 'terraform/terraform.tfvars.json'
       base_branch: ${{inputs.infrastructure_base_branch}}
       app-id: ${{inputs.deployment-app-id}}
       github-organization: 'blw-ofag-ufag'
