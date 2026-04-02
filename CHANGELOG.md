@@ -1,3 +1,9 @@
+## [1.3.0-rc.1](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.9...v1.3.0-rc.1) (2026-04-02)
+
+### Features
+
+* changes hello test string ([af81c48](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/af81c48fc6061dc4b28ab9f623c20b6c4c54b722))
+
 ## [1.2.9](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.2.8...v1.2.9) (2026-04-01)
 
 ### Bug Fixes
