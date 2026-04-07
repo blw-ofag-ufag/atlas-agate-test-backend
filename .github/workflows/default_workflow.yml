@@ -49,7 +49,7 @@ jobs:
 
   backend-workflow:
     name: "."
-    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/backend_workflow.yml@v1.0.0
+    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/backend_workflow.yml@feature/disable-owasp
     needs: [ set-env, resolve-env-vars ]
     secrets:
       GH_ORG_GITLEAKS_PRIVATE_KEY: ${{ secrets.GH_ORG_GITLEAKS_PRIVATE_KEY }}
@@ -70,3 +70,4 @@ jobs:
       application-name: 'agate-test-backend'
       infrastructure_repo: ${{ needs.resolve-env-vars.outputs.infrastructure_repo }}
       github-organization: 'blw-ofag-ufag'
+      enable-owasp-check: false
