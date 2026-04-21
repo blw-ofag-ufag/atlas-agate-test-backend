@@ -23,6 +23,11 @@ import org.slf4j.event.Level;
 public class PreSecurityLogFilter {
   private static final String START_TIME_KEY = "request.startTime";
   private static final List<String> URIS_TO_APPLY = List.of("/api");
+  public static final String OPERATION = "operation";
+  public static final String METHOD = "method";
+  public static final String URI = "uri";
+  public static final String CONTENT_TYPE = "contentType";
+  public static final String BODY = "body";
 
   @ConfigProperty(name = "quarkus.http.root-path", defaultValue = "")
   String contextRoot;
@@ -63,10 +68,10 @@ public class PreSecurityLogFilter {
         logRequestWithBody(ctx);
       } else {
         var logBuilder = log.atInfo()
-            .addKeyValue("operation", "rest.request")
-            .addKeyValue("method", ctx.request().method())
-            .addKeyValue("uri", uriWithQuery)
-            .addKeyValue("contentType", getContentType(ctx));
+            .addKeyValue(OPERATION, "rest.request")
+            .addKeyValue(METHOD, ctx.request().method())
+            .addKeyValue(URI, uriWithQuery)
+            .addKeyValue(CONTENT_TYPE, getContentType(ctx));
 
 
         logBuilder.log("REQUEST: {} {} {} {}", ctx.request().method(), uriWithQuery,
@@ -83,11 +88,11 @@ public class PreSecurityLogFilter {
       String uriWithQuery = getUriWithQuery(ctx);
 
       var logBuilder = log.atDebug()
-          .addKeyValue("operation", "rest.request")
-          .addKeyValue("method", ctx.request().method())
-          .addKeyValue("uri", uriWithQuery)
-          .addKeyValue("contentType", getContentType(ctx))
-          .addKeyValue("body", bodyString);
+          .addKeyValue(OPERATION, "rest.request")
+          .addKeyValue(METHOD, ctx.request().method())
+          .addKeyValue(URI, uriWithQuery)
+          .addKeyValue(CONTENT_TYPE, getContentType(ctx))
+          .addKeyValue(BODY, bodyString);
 
       logBuilder.log("REQUEST: {} {} {}", ctx.request().method(),
           uriWithQuery, getContentType(ctx));
@@ -104,9 +109,9 @@ public class PreSecurityLogFilter {
       String uriWithQuery = getUriWithQuery(ctx);
 
       log.atInfo()
-          .addKeyValue("operation", "rest.response")
-          .addKeyValue("method", ctx.request().method())
-          .addKeyValue("uri", uriWithQuery)
+          .addKeyValue(OPERATION, "rest.response")
+          .addKeyValue(METHOD, ctx.request().method())
+          .addKeyValue(URI, uriWithQuery)
           .addKeyValue("status", status)
           .addKeyValue("duration", duration)
           .log("RESPONSE: {} {} status: {} duration: {} ms", ctx.request().method(),

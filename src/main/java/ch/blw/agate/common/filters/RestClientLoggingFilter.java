@@ -103,8 +103,8 @@ public class RestClientLoggingFilter implements ClientRequestFilter, ClientRespo
     }
 
     // If entity is already a String, compact it if it's JSON
-    if (entity instanceof String) {
-      return compactIfJson((String) entity);
+    if (entity instanceof String entityString) {
+      return compactIfJson(entityString);
     }
     try {
       return OBJECT_MAPPER.writeValueAsString(entity);

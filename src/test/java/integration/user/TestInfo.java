@@ -34,10 +34,10 @@ public class TestInfo {
         });
 
     assertThat(userToken).isNotNull();
-    assertThat(userToken.get("sub")).isEqualTo(PRODUCER_LUKAS.getSub());
-    assertThat(userToken.get("loginid")).isEqualTo(PRODUCER_LUKAS.getAgateLoginId());
-    assertThat(userToken.get("KT_ID_P")).isEqualTo(PRODUCER_LUKAS.getKtIdP());
-    assertThat(userToken.get("extId")).isEqualTo(PRODUCER_LUKAS.getExtId());
+    assertThat(userToken).containsEntry("sub", PRODUCER_LUKAS.getSub());
+    assertThat(userToken).containsEntry("loginid", PRODUCER_LUKAS.getAgateLoginId());
+    assertThat(userToken).containsEntry("KT_ID_P", PRODUCER_LUKAS.getKtIdP());
+    assertThat(userToken).containsEntry("extId", PRODUCER_LUKAS.getExtId());
 
     @SuppressWarnings("unchecked")
     var roles = (List<Map<String, Object>>) ((Map<String, Object>) userToken.get("realm_access")).get("roles");
