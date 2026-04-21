@@ -1,3 +1,14 @@
+## [1.0.0-rc.2](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2026-04-21)
+
+### Features
+
+* **auth:** adds auth A1-41 ([4e58b4b](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/4e58b4bc5f75a24aeff002832414382224dc5ec2)), closes [A1-41](https://blw-ofag-ufag.atlassian.net/browse/A1-41)
+
+### Bug Fixes
+
+* **sonar:** fixes sonar issues A1-41 ([b126163](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/b1261631021c755150c67d500f30a0d3d271d808)), closes [A1-41](https://blw-ofag-ufag.atlassian.net/browse/A1-41)
+* **test:** trigger pipeline ([0f7f765](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/0f7f765075257a34ecf3e0ec58b1d9f6c8a9a13c))
+
 ## 1.0.0-rc.1 (2026-04-07)
 
 ### Features
