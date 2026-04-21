@@ -400,13 +400,6 @@
 <!--              RECORD_DEF, ANNOTATION_DEF"/>-->
 <!--            <property name="excludeScope" value="nothing"/>-->
 <!--        </module>-->
-        <module name="WriteTag">
-            <property name="tag" value="@CommentLastReviewed"/>
-            <property name="tokens"
-                      value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF,
-              RECORD_DEF, ANNOTATION_DEF"/>
-            <property name="tagFormat" value="\d{4}-\d{2}-\d{2}"/>
-        </module>
         <module name="MethodName">
             <property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9]*$"/>
             <message key="name.invalidPattern"
