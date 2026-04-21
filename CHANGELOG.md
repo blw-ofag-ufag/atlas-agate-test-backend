@@ -1,3 +1,9 @@
+## [1.0.0-rc.3](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2026-04-21)
+
+### Bug Fixes
+
+* **cors:** fixes cors auth issue ([daef6fc](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/daef6fc92ac3dfcb3f8373775b7511e1113f3fd9))
+
 ## [1.0.0-rc.2](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2026-04-21)
 
 ### Features
