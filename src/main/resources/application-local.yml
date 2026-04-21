@@ -1,7 +1,7 @@
+atlas:
+  exception-handling:
+    return-debug: true
 quarkus:
-  atlas:
-    exception-handling:
-      return-debug: true
   #  hibernate-orm:
   #    log:
   #      sql: false

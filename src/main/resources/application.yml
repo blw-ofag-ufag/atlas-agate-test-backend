@@ -36,6 +36,12 @@ quarkus:
         api-protected:
           paths: api/*
           policy: authenticated
+          methods: GET,POST,PUT,DELETE,PATCH
+        api-options:
+          paths: api/*
+          methods: OPTIONS
+          policy: permit
+          auth-mechanism: none
         unprotected:
           paths: q/*
           policy: permit
@@ -46,7 +52,7 @@ quarkus:
       headers:
         - Authorization
         - Content-Type
-        - X-Impersonated-AgateLoginId
+        - X-Requested-With
       methods:
         - GET
         - PUT
