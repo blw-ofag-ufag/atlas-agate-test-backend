@@ -1,0 +1,12 @@
+### get self
+GET {{baseUrl}}/user/v1/user-token
+Authorization: Bearer {{$auth.token("producer")}}
+Content-Type: application/json
+
+> {%
+    client.test("Get token", function () {
+        client.assert(response.status === 200, "Expected Response status is 200, got: " + response.status)
+        client.assert(response.body !== null, "Expected Response to contain token")
+    })
+%}
+

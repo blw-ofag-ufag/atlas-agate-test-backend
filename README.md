@@ -1,31 +1,71 @@
-# Agate Test Backend
+# 🌿 Agate Test Backend
 
-This project is used to simulate backends that will use or validate agate tokens.
+Simulates backends that validate Agate tokens. The service exposes the decoded token claims and user-info for the authenticated user, and serves as a reference implementation for
+Agate OIDC integration.
 
-## Running the application in dev mode
+---
 
-You can run your application in dev mode that enables live coding using:
+## 🚀 Getting Started
 
-```shell script
-./mvnw quarkus:dev
+### Run in dev mode
+
+```shell
+./mvnw quarkus:dev -Dquarkus.profile=local
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8900/q/dev/>.
+### 🔐 Keycloak
 
-## Github Workflow
+By default the app connects to the Keycloak instance on the `dev` environment. Two alternatives:
 
-This project uses the BLW github workflow as described here: https://github.com/blw-ofag-ufag/atlas-code-github-workflows
+| Option               | How                                                                                 |
+|----------------------|-------------------------------------------------------------------------------------|
+| 🖥️ Local Keycloak   | Spin up via [atlas-agate-local](https://github.com/blw-ofag-ufag/atlas-agate-local) |
+| 📦 Embedded Keycloak | Copy the OIDC config from `application-test.yml` into your local profile            |
 
-## Checkstyle
+---
 
-make sure to add the checkstyle plugin and import checkstyle configuration in your IDE to avoid checkstyle errors when pushing code. The checkstyle configuration file is located at
-`checkstyle.xml` in the root of the repository.
+## 🧪 Tests
 
-Make sure to exclude sql scripts in checkstyle settings like this: *.{sql}
+`@QuarkusTest` spins up a Keycloak container configured similarly to the real Agate realm, but without brokering authentication to eIAM. Tests can also be driven via Swagger UI or
+the `.http` test files.
 
-## Semantic versioning
+---
 
-Semantic versioning requires
+## ⚙️ GitHub Workflow
 
-* package.json: specify which pnpm version is used to execute semantic versioning
-* .releaserc.json configure the semantic versioning process, e.g. which branches are used for releases, how to determine the next version, etc.
+Uses the BLW shared workflow: [atlas-code-github-workflows](https://github.com/blw-ofag-ufag/atlas-code-github-workflows)
+
+---
+
+## ✅ Checkstyle
+
+Import the Checkstyle plugin in your IDE and point it at `checkstyle.xml` in the repository root to catch violations before pushing.
+
+In the IDE Checkstyle settings, exclude SQL scripts:
+
+```
+*.{sql}
+```
+
+Run Checkstyle:
+
+```shell
+./mvnw checkstyle:check
+```
+
+---
+
+## 🔖 Semantic Versioning
+
+Versioning is driven by two files:
+
+| File              | Purpose                                                  |
+|-------------------|----------------------------------------------------------|
+| `package.json`    | Pins the `pnpm` version used to run semantic-release     |
+| `.releaserc.json` | Configures branches, version strategy, and release steps |
+
+---
+
+## 🎨 ASCII Banner
+
+Generated with [manytools.org ASCII banner](https://manytools.org/hacker-tools/ascii-banner/) — font: **Slant**

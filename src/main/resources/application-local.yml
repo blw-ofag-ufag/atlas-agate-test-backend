@@ -1,0 +1,75 @@
+quarkus:
+  atlas:
+    exception-handling:
+      return-debug: true
+  #  hibernate-orm:
+  #    log:
+  #      sql: false
+  #      format-sql: true
+  console:
+    color: true
+  #  cxf:
+  #    client:
+  #      uid:
+  #        http-conduit-factory: URLConnectionHTTPConduitFactory
+  #        client-endpoint-url: http://localhost:8050/uid-register/findByUid
+  #  datasource:
+  #    devservices:
+  #      db-name: agridata
+  #      enabled: true
+  #      password: secret
+  #      port: 5432
+  #      username: admin
+  #  flyway:
+  #    locations:
+  #      - classpath:db/migration
+  http:
+    cors:
+      origins:
+        - http://localhost:4200
+  #  keycloak:
+  #    devservices:
+  #      port: 6999
+  #      realm-path: agate_realm.json
+  log:
+    console:
+      json:
+        enabled: false
+    category:
+      ch.blw.agate.common.filters:
+        level: DEBUG
+      io.quarkiverse.wiremock.devservice.WireMockServer:
+        level: WARN
+      io.quarkus.oidc.client:
+        level: DEBUG
+      io.quarkus.rest.client:
+        level: DEBUG
+      org.jboss.resteasy.reactive.client.logging:
+        level: WARN
+      org.jboss.resteasy.reactive.server.logging:
+        level: WARN
+      ch.blw.agate.common.filters.RestClientLoggingFilter:
+        level: DEBUG
+    level: INFO
+  oidc:
+    #auth-server-url: http://localhost:9999/realms/agate
+    auth-server-url: https://backend.blw-agate-dev.pc-core.isceco.admin.ch/idp/realms/agate
+    token:
+      audience: agate-backend
+
+    # oidc-client:
+    #  agis-api:
+    #   token-path: http://localhost:9999/agate/token
+  #  rest-client:
+  #    agis-register-api:
+  #      url: http://localhost:8050/agis/register-data/1
+  #    logging:
+  #      body-limit: 10240
+  #      scope: request-response
+  swagger-ui:
+    oauth-client-id: agate
+#  wiremock:
+#    devservices:
+#      enabled: true
+#      files-mapping: src/test/resources/wiremock
+#      port: 8050
