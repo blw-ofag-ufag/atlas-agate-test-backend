@@ -50,12 +50,19 @@ quarkus:
         level: WARN
       ch.blw.agate.common.filters.RestClientLoggingFilter:
         level: DEBUG
-    level: INFO
+    level: DEBUG
   oidc:
-    #auth-server-url: http://localhost:9999/realms/agate
-    auth-server-url: https://backend.blw-agate-dev.pc-core.isceco.admin.ch/idp/realms/agate
-    token:
-      audience: agate-backend
+    resolve-tenants-with-issuer: true
+    agate-new:
+      auth-server-url: https://backend.blw-agate-dev.pc-core.isceco.admin.ch/idp/realms/agate
+      application-type: service
+      token:
+        audience: agate-backend
+    agate-old:
+      auth-server-url: http://localhost:9999/realms/agate    #auth-server-url: https://backend.blw-agate-dev.pc-core.isceco.admin.ch/idp/realms/agate
+      application-type: service
+      token:
+        audience: agate-backend
 
     # oidc-client:
     #  agis-api:
