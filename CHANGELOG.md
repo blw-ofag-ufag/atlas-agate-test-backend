@@ -1,3 +1,9 @@
+## [1.0.0-rc.4](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.3...v1.0.0-rc.4) (2026-04-27)
+
+### Features
+
+* **auth:** adds multi tenant support ([e2de07b](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/e2de07bd1586afd9a46f359a26f4716ce3bf1e2c))
+
 ## [1.0.0-rc.3](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2026-04-21)
 
 ### Bug Fixes
