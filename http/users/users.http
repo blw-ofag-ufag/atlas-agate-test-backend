@@ -1,6 +1,7 @@
 ### get self
 GET {{baseUrl}}/user/v1/user-token
 Authorization: Bearer {{$auth.token("producer")}}
+
 Content-Type: application/json
 
 > {%

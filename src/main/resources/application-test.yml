@@ -3,10 +3,10 @@ quarkus:
     test-timeout: 60s
   console:
     color: true
-  keycloak:
-    devservices:
-      realm-path: agate-realm.json
-      start-timeout: 300s
+  #keycloak:
+    #devservices:
+      #realm-path: agate-realm.json
+      #start-timeout: 300s
   #  cxf:
   #    client:
   #      uid:
