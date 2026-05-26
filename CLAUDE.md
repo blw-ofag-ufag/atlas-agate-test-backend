@@ -41,7 +41,7 @@ Swagger UI: `http://localhost:8900/test-backend/q/swagger-ui` once running. `.ht
 - `@QuarkusTest` uses Quarkus's Keycloak Dev Service, seeded from `src/test/resources/agate-realm.json`. Test users and their expected claims live in `integration/testutils/TestUserEnum.java`; auth flow goes through `AuthTestUtils.requestAs(user)`.
 - The test Keycloak mirrors the real Agate realm's structure but does not broker to eIAM, so brokered-identity flows can't be tested here.
 - `quarkus-jacoco` collects coverage for `@QuarkusTest` (the regular JaCoCo agent is configured with `exclClassLoaders=*QuarkusClassLoader` to avoid double-counting).
-- **When writing or modifying tests, read `.claude/testing-guidelines.md` first and follow its do's / don'ts. Do not load it for non-test changes.**
+- **When writing or modifying tests, the `testing-guidelines` skill (`.claude/skills/testing-guidelines/SKILL.md`) is the authoritative source for conventions, do's / don'ts, and canonical example files. It is auto-invoked on test-related work; do not load it for non-test changes.**
 
 ## Code style
 
