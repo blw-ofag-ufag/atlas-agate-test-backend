@@ -1,3 +1,9 @@
+## [1.0.0-rc.5](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.4...v1.0.0-rc.5) (2026-06-03)
+
+### Features
+
+* **auth:** switches producer-info role prefix to agridata.ch A1-130 (#4) ([57366c8](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/57366c895c49dfe5e85fa1e4eb8ce19a27a72f01)), closes [A1-130](https://blw-ofag-ufag.atlassian.net/browse/A1-130)
+
 ## [1.0.0-rc.4](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.3...v1.0.0-rc.4) (2026-04-27)
 
 ### Features
