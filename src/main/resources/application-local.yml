@@ -27,10 +27,11 @@ quarkus:
     cors:
       origins:
         - http://localhost:4200
-  #  keycloak:
-  #    devservices:
-  #      port: 6999
-  #      realm-path: agate_realm.json
+  keycloak:
+    devservices:
+      enabled: false
+#      port: 6999
+#      realm-path: agate_realm.json
   log:
     console:
       json:
@@ -57,12 +58,12 @@ quarkus:
       auth-server-url: https://backend.blw-agate-dev.pc-core.isceco.admin.ch/idp/realms/agate
       application-type: service
       token:
-        audience: agate-backend
+        audience: agridata-backend
     agate-old:
       auth-server-url: http://localhost:9999/realms/agate    #auth-server-url: https://backend.blw-agate-dev.pc-core.isceco.admin.ch/idp/realms/agate
       application-type: service
       token:
-        audience: agate-backend
+        audience: agridata-backend
 
     # oidc-client:
     #  agis-api:

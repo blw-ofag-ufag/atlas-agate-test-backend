@@ -9,7 +9,7 @@ public class AuthTestUtils {
 
   private static final KeycloakTestClient keycloakClient = new KeycloakTestClient();
   private static final String TEST_USER_PASSWORD = "secret";
-  private static final String CLIENT_ID = "agate";
+  private static final String CLIENT_ID = "agridata";
   private static final String CLIENT_SECRET = "secret";
 
   public static RequestSpecification requestAs(TestUserEnum user) {
