@@ -34,7 +34,7 @@
   "rememberMe" : false,
   "verifyEmail" : false,
   "loginWithEmailAllowed" : false,
-  "duplicateEmailsAllowed" : false,
+  "duplicateEmailsAllowed" : true,
   "resetPasswordAllowed" : false,
   "editUsernameAllowed" : false,
   "bruteForceProtected" : false,
@@ -598,7 +598,7 @@
   "webAuthnPolicyPasswordlessExtraOrigins" : [ ],
   "users" : [ {
     "id" : "27007819-cb9f-4205-be97-c92b9e1df03f",
-    "username" : "andreas.ruettimann@ti8m.ch",
+    "username" : "andreas.ruettimann@ti8m.ch_eid\\5300\\3420018",
     "email" : "andreas.ruettimann@ti8m.ch",
     "emailVerified" : true,
     "attributes" : {
@@ -627,11 +627,11 @@
     "groups" : [ ]
   }, {
     "id" : "62f67166-ff35-4b56-801d-96437834b364",
-    "username" : "blw.test.producer.erika@proton.me",
+    "username" : "blw.test.producer.erika@proton.me_eid\\9000\\0000001",
     "email" : "blw.test.producer.erika@proton.me",
     "emailVerified" : true,
     "attributes" : {
-      "sub" : [ "f:8a3a58d6-b5d3-482b-830a-6fd4791f4649:184723" ],
+      "sub" : [ "eid\\9000\\0000001" ],
       "phone_number" : [ "+41 12 345 67 8" ],
       "loginid" : [ "3477580" ],
       "extId" : [ "184723" ],
@@ -659,11 +659,11 @@
     "groups" : [ ]
   }, {
     "id" : "8afc4e6a-6d44-4e52-b0e7-366f3ca8dec1",
-    "username" : "blw.test.producer.lukas@proton.me",
+    "username" : "blw.test.producer.lukas@proton.me_eid\\9000\\0000002",
     "email" : "blw.test.producer.lukas@proton.me",
     "emailVerified" : true,
     "attributes" : {
-      "sub" : [ "f:8a3a58d6-b5d3-482b-830a-6fd4791f4649:184723" ],
+      "sub" : [ "eid\\9000\\0000002" ],
       "phone_number" : [ "+41 12 345 67 89" ],
       "loginid" : [ "3477580" ],
       "extId" : [ "184723" ],
