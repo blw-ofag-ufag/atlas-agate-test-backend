@@ -2228,6 +2228,16 @@
     "types" : [ "USER_AUTHENTICATION", "CLIENT_ASSERTION", "EXCHANGE_EXTERNAL_TOKEN", "JWT_AUTHORIZATION_GRANT" ]
   } ],
   "identityProviderMappers" : [ {
+    "id" : "a1133b00-0000-4000-8000-000000000001",
+    "name" : "username-template",
+    "identityProviderAlias" : "eiam",
+    "identityProviderMapper" : "oidc-username-idp-mapper",
+    "config" : {
+      "template" : "${CLAIM.email}_${CLAIM.sub}",
+      "syncMode" : "IMPORT",
+      "target" : "LOCAL"
+    }
+  }, {
     "id" : "1e4fb014-fcf5-430f-a75e-c9281bafef0e",
     "name" : "agate-AgateBenutzer",
     "identityProviderAlias" : "eiam",
