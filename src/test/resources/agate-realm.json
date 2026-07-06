@@ -688,6 +688,78 @@
     },
     "notBefore" : 0,
     "groups" : [ ]
+  }, {
+    "id" : "07e27e47-e454-45cc-94b2-1186eef7b308",
+    "username" : "svc-ref-biosuisse1",
+    "email" : "test.consumer.biosuisse@blw.admin.ch",
+    "emailVerified" : true,
+    "attributes" : {
+      "sub" : [ "SVC-REF-BIOSUISSE1" ]
+    },
+    "enabled" : true,
+    "totp" : false,
+    "credentials" : [ {
+      "type" : "password",
+      "value" : "secret",
+      "temporary" : false
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-agate" ],
+    "clientRoles" : {
+      "agridata" : [ "Agridata_Datenbezueger" ],
+      "agate" : [ "AgateBenutzer", "Agridata_Datenbezueger" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "846fb784-064c-4bfa-842b-94a029a6c2a2",
+    "username" : "svc-ref-erika1",
+    "email" : "test.producer.erika@blw.admin.ch",
+    "emailVerified" : true,
+    "attributes" : {
+      "sub" : [ "SVC-REF-ERIKA1" ]
+    },
+    "enabled" : true,
+    "totp" : false,
+    "credentials" : [ {
+      "type" : "password",
+      "value" : "secret",
+      "temporary" : false
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-agate" ],
+    "clientRoles" : {
+      "agridata" : [ "Agridata_Einwilliger" ],
+      "agate" : [ "AgateBenutzer", "Agridata_Einwilliger" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "84aef287-d075-47bf-bfb9-72649b2af681",
+    "username" : "svc-ref-agridata-av1",
+    "email" : "test.delegate.susi@blw.admin.ch",
+    "emailVerified" : true,
+    "attributes" : {
+      "sub" : [ "SVC-REF-AGRIDATA-AV1" ]
+    },
+    "enabled" : true,
+    "totp" : false,
+    "credentials" : [ {
+      "type" : "password",
+      "value" : "secret",
+      "temporary" : false
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-agate" ],
+    "clientRoles" : {
+      "agridata" : [ "Agridata_Admin" ],
+      "agate" : [ "AgateBenutzer", "Agridata_Admin" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
   } ],
   "scopeMappings" : [ {
     "clientScope" : "offline_access",
