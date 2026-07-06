@@ -694,7 +694,10 @@
     "email" : "test.consumer.biosuisse@blw.admin.ch",
     "emailVerified" : true,
     "attributes" : {
-      "sub" : [ "SVC-REF-BIOSUISSE1" ]
+      "sub" : [ "SVC-REF-BIOSUISSE1" ],
+      "loginid" : [ "20154600" ],
+      "extId" : [ "184103" ],
+      "uid" : [ "CHE101708094" ]
     },
     "enabled" : true,
     "totp" : false,
@@ -718,7 +721,11 @@
     "email" : "test.producer.erika@blw.admin.ch",
     "emailVerified" : true,
     "attributes" : {
-      "sub" : [ "SVC-REF-ERIKA1" ]
+      "sub" : [ "SVC-REF-ERIKA1" ],
+      "loginid" : [ "3477580" ],
+      "extId" : [ "184723" ],
+      "KT_ID_P" : [ "FLXXA0001" ],
+      "uid" : [ "CHE101000001" ]
     },
     "enabled" : true,
     "totp" : false,
@@ -742,7 +749,8 @@
     "email" : "test.delegate.susi@blw.admin.ch",
     "emailVerified" : true,
     "attributes" : {
-      "sub" : [ "SVC-REF-AGRIDATA-AV1" ]
+      "sub" : [ "SVC-REF-AGRIDATA-AV1" ],
+      "loginid" : [ "3477554" ]
     },
     "enabled" : true,
     "totp" : false,
