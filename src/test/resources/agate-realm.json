@@ -724,8 +724,7 @@
       "sub" : [ "SVC-REF-ERIKA1" ],
       "loginid" : [ "3477580" ],
       "extId" : [ "184723" ],
-      "KT_ID_P" : [ "FLXXA0001" ],
-      "uid" : [ "CHE101000001" ]
+      "KT_ID_P" : [ "FLXXA0001" ]
     },
     "enabled" : true,
     "totp" : false,
