@@ -3,6 +3,7 @@ package ch.blw.agate.user.soap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.junit.jupiter.api.Test;
@@ -29,8 +30,8 @@ class XmlAdapterTest {
 
   @Test
   void localDate_parsesAndMarshalsBack() {
-    assertThat(localDateAdapter.unmarshal("2026-04-20")).isEqualTo(LocalDate.of(2026, 4, 20));
-    assertThat(localDateAdapter.marshal(LocalDate.of(2026, 4, 20))).isEqualTo("2026-04-20");
+    assertThat(localDateAdapter.unmarshal("2026-04-20")).isEqualTo(LocalDate.of(2026, Month.APRIL, 20));
+    assertThat(localDateAdapter.marshal(LocalDate.of(2026, Month.APRIL, 20))).isEqualTo("2026-04-20");
     assertThat(localDateAdapter.unmarshal(null)).isNull();
     assertThat(localDateAdapter.marshal(null)).isNull();
   }

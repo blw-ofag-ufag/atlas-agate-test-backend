@@ -2,6 +2,9 @@ package ch.blw.agate.user.soap;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import ch.blw.agate.common.exceptions.ExternalWebServiceException;
 import ch.blw.agate.user.dto.TvdUserDto;
@@ -16,7 +19,6 @@ import java.io.InputStream;
 import java.util.List;
 import javax.xml.transform.stream.StreamSource;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 class AgateUserQueryServiceTest {
 
@@ -37,8 +39,8 @@ class AgateUserQueryServiceTest {
 
   @Test
   void queryUsers_mapsClientResponseToDtos() throws Exception {
-    AdminService client = Mockito.mock(AdminService.class);
-    Mockito.when(client.queryUsers(Mockito.any()))
+    AdminService client = mock(AdminService.class);
+    when(client.queryUsers(any()))
         .thenReturn(List.of(user("3365033", "Ramon", "Rüfenacht", "184723"), user("9811215", "David", "Oberli", "184724")));
 
     List<TvdUserDto> dtos = new AgateUserQueryService(client).queryUsers();
@@ -49,11 +51,11 @@ class AgateUserQueryServiceTest {
 
   @Test
   void queryUsers_wrapsSoapFaultInExternalWebServiceException() throws Exception {
-    AdminService client = Mockito.mock(AdminService.class);
-    Mockito.when(client.queryUsers(Mockito.any())).thenThrow(new BusinessException("boom"));
+    AdminService client = mock(AdminService.class);
+    when(client.queryUsers(any())).thenThrow(new BusinessException("boom"));
+    AgateUserQueryService service = new AgateUserQueryService(client);
 
-    assertThatThrownBy(() -> new AgateUserQueryService(client).queryUsers())
-        .isInstanceOf(ExternalWebServiceException.class);
+    assertThatThrownBy(service::queryUsers).isInstanceOf(ExternalWebServiceException.class);
   }
 
   @Test

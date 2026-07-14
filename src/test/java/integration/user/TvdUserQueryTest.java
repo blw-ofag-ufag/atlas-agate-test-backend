@@ -2,6 +2,7 @@ package integration.user;
 
 import static integration.testutils.TestUserEnum.EINWILLIGER_ERIKA;
 import static org.hamcrest.Matchers.hasItems;
+import static org.mockito.Mockito.when;
 
 import ch.blw.agate.user.controller.TvdUserController;
 import ch.blw.agate.user.dto.TvdUserDto;
@@ -12,7 +13,6 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 @QuarkusTest
 class TvdUserQueryTest {
@@ -22,7 +22,7 @@ class TvdUserQueryTest {
 
   @Test
   void givenAuthUser_whenQueryUsers_thenReturnsMappedDtos() {
-    Mockito.when(agateUserQueryService.queryUsers()).thenReturn(List.of(
+    when(agateUserQueryService.queryUsers()).thenReturn(List.of(
         new TvdUserDto("3365033", "Ramon", "Rüfenacht", "184723", "Default"),
         new TvdUserDto("9811215", "David", "Oberli", "184724", "Default")));
 
