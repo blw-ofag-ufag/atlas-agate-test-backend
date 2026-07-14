@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:ns0="http://adnovum.ch/nevisidm/ws/services/v1_44"
+                  targetNamespace="http://adnovum.ch/nevisidm/ws/services/v1_44">
+
+    <wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <xsd:schema>
+            <xsd:import schemaLocation="v1_44.xsd3.xsd"
+                        namespace="http://adnovum.ch/nevisidm/ws/services/v1"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="queryUsers">
+        <wsdl:part name="parameters" element="xsns:queryUsers"
+                   xmlns:xsns="http://adnovum.ch/nevisidm/ws/services/v1"/>
+    </wsdl:message>
+    <wsdl:message name="queryUsersResponse">
+        <wsdl:part name="parameters" element="xsns:queryUsersResponse"
+                   xmlns:xsns="http://adnovum.ch/nevisidm/ws/services/v1"/>
+    </wsdl:message>
+    <wsdl:message name="BusinessException">
+        <wsdl:part name="fault" element="xsns:BusinessException"
+                   xmlns:xsns="http://adnovum.ch/nevisidm/ws/services/v1"/>
+    </wsdl:message>
+    <wsdl:message name="TechnicalException">
+        <wsdl:part name="fault" element="xsns:TechnicalException"
+                   xmlns:xsns="http://adnovum.ch/nevisidm/ws/services/v1"/>
+    </wsdl:message>
+
+    <wsdl:portType name="AdminService">
+        <wsdl:operation name="queryUsers">
+            <wsdl:input name="queryUsersRequest" message="ns0:queryUsers"/>
+            <wsdl:output name="queryUsersResponse" message="ns0:queryUsersResponse"/>
+            <wsdl:fault name="BusinessException" message="ns0:BusinessException"/>
+            <wsdl:fault name="TechnicalException" message="ns0:TechnicalException"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="AdminServicePortBinding" type="ns0:AdminService">
+        <soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="queryUsers">
+            <soap11:operation soapAction="" style="document"/>
+            <wsdl:input name="queryUsersRequest">
+                <soap11:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="queryUsersResponse">
+                <soap11:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="BusinessException">
+                <soap11:fault name="BusinessException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="TechnicalException">
+                <soap11:fault name="TechnicalException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="AdminService_v1_44">
+        <wsdl:port name="AdminServicePort" binding="ns0:AdminServicePortBinding">
+            <!-- location is rewritten at runtime via quarkus.cxf.endpoint.<path>.published-endpoint-url -->
+            <soap11:address location="REPLACED_AT_RUNTIME"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
