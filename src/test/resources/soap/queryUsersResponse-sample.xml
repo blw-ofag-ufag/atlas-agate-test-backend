@@ -1,0 +1,16 @@
+<ns:queryUsersResponse xmlns:ns="http://adnovum.ch/nevisidm/ws/services/v1">
+  <return>
+    <loginId>3365033</loginId>
+    <extId>184723</extId>
+    <clientName>Default</clientName>
+    <firstName>Ramon</firstName>
+    <name>Rüfenacht</name>
+  </return>
+  <return>
+    <loginId>9811215</loginId>
+    <extId>184724</extId>
+    <clientName>Default</clientName>
+    <firstName>David</firstName>
+    <name>Oberli</name>
+  </return>
+</ns:queryUsersResponse>

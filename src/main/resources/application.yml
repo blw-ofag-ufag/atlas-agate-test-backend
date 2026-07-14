@@ -6,16 +6,20 @@ quarkus:
     name: "Agate test backend"
   banner:
     path: banner.txt
-  #  cxf:
-  #    client:
-  #      uid:
-  #        client-endpoint-url: https://www.uid-wse-a.admin.ch/V5.0/PublicServices.svc
-  #        service-interface: ch.admin.uid.xmlns.uid_wse.IPublicServices
-  #        wsdl: classpath:wsdl/uid-register.wsdl
-  #    codegen:
-  #      wsdl2java:
-  #        uid:
-  #          includes: wsdl/uid-register.wsdl
+  cxf:
+    codegen:
+      wsdl2java:
+        nevis:
+          includes: wsdl/nevis_api.wsdl
+          package-names: ch.blw.agate.user.soap.generated
+          additional-params:
+            - -b
+            - src/main/resources/wsdl/bindings.xjb
+    client:
+      adminService:
+        client-endpoint-url: ${SOAP_ENDPOINT_URL:https://backend.blw-agate-dev.pc-core.isceco.admin.ch/backend/soap/AdminService/v1_44}
+        service-interface: ch.blw.agate.user.soap.generated.AdminService
+        out-interceptors: "#bearerTokenInterceptor"
   #  datasource:
   #    db-kind: postgresql
   #    jdbc:
@@ -112,3 +116,17 @@ mp:
       exclude:
         packages:
           - org.openapitools.api # excludes the automatically generated apis (e.g. AGIS) from the openapi documents
+"%production":
+  quarkus:
+    oidc-client:
+      auth-server-url: ${OIDC_CLIENT_AUTH_SERVER_URL:https://backend.blw-agate-dev.pc-core.isceco.admin.ch:8443/idp/realms/agate}
+      client-id: agate-test-backend
+      grant:
+        type: client
+      tls-configuration-name: agate-mtls
+    tls:
+      agate-mtls:
+        key-store:
+          p12:
+            path: ${MTLS_CLIENT_KEYSTORE_PATH:/deployments/certs/agate-client.p12}
+            password: ${MTLS_CLIENT_KEYSTORE_PASSWORD}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Maps xs:date / xs:dateTime onto java.time via XmlAdapter. IDE "xjc:javaType not allowed" warnings are false positives; XJC processes it at build time. -->
+<jaxb:bindings version="3.0"
+               xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <jaxb:globalBindings>
+        <xjc:javaType name="java.time.OffsetDateTime" xmlType="xs:dateTime"
+                      adapter="ch.blw.agate.user.soap.OffsetDateTimeXmlAdapter"/>
+        <xjc:javaType name="java.time.LocalDate" xmlType="xs:date"
+                      adapter="ch.blw.agate.user.soap.LocalDateXmlAdapter"/>
+    </jaxb:globalBindings>
+
+    <!-- Rename xs:element isTechnicalUser -> Java property technicalUser so the generated getter
+         becomes isTechnicalUser() (instead of the default isIsTechnicalUser()) and the setter
+         becomes setTechnicalUser(). -->
+    <jaxb:bindings schemaLocation="v1_44.xsd3.xsd" node="/xs:schema">
+        <jaxb:bindings node="//xs:complexType[@name='user']//xs:element[@name='isTechnicalUser']">
+            <jaxb:property name="technicalUser"/>
+        </jaxb:bindings>
+    </jaxb:bindings>
+</jaxb:bindings>
