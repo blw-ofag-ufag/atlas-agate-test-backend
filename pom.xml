@@ -30,7 +30,8 @@
         <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
         <openapi-generator.version>7.17.0</openapi-generator.version>
 
-        <!--        <sonar.exclusions></sonar.exclusions>-->
+        <sonar.exclusions>**/generated/**</sonar.exclusions>
+        <sonar.coverage.exclusions>**/generated/**</sonar.coverage.exclusions>
     </properties>
 
     <dependencyManagement>

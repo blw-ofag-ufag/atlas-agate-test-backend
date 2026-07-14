@@ -17,9 +17,12 @@ public class AgateUserQueryService {
 
   static final int DEFAULT_NUM_RECORDS = 1000;
 
+  private final AdminService adminService;
+
   @Inject
-  @CXFClient("adminService")
-  AdminService adminService;
+  public AgateUserQueryService(@CXFClient("adminService") AdminService adminService) {
+    this.adminService = adminService;
+  }
 
   public List<TvdUserDto> queryUsers() {
     try {
