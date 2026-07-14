@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  External JAXB bindings for the Nevis IDM schema. Maps xs:date / xs:dateTime onto java.time types via
-  XmlAdapter (instead of XMLGregorianCalendar) so the generated DTOs are pleasant to use.
-
-  IntelliJ may flag xjc:javaType as "not allowed here" — that is a false positive. The JAXB 3.0
-  binding schema declares <xs:any namespace="##other" processContents="lax"/> inside globalBindings,
-  which permits exactly this kind of vendor extension. Apache CXF / XJC processes it correctly at
-  build time. Suppress the inspection in your IDE if it bothers you.
--->
+<!-- Maps xs:date / xs:dateTime onto java.time via XmlAdapter. IDE "xjc:javaType not allowed" warnings are false positives; XJC processes it at build time. -->
 <jaxb:bindings version="3.0"
                xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
                xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
