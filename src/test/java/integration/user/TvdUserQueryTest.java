@@ -1,0 +1,42 @@
+package integration.user;
+
+import static integration.testutils.TestUserEnum.EINWILLIGER_ERIKA;
+import static org.hamcrest.Matchers.hasItems;
+
+import ch.blw.agate.user.controller.TvdUserController;
+import ch.blw.agate.user.dto.TvdUserDto;
+import ch.blw.agate.user.soap.AgateUserQueryService;
+import integration.testutils.AuthTestUtils;
+import io.quarkus.test.InjectMock;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+@QuarkusTest
+class TvdUserQueryTest {
+
+  @InjectMock
+  AgateUserQueryService agateUserQueryService;
+
+  @Test
+  void givenAuthUser_whenQueryUsers_thenReturnsMappedDtos() {
+    Mockito.when(agateUserQueryService.queryUsers()).thenReturn(List.of(
+        new TvdUserDto("3365033", "Ramon", "Rüfenacht", "184723", "Default"),
+        new TvdUserDto("9811215", "David", "Oberli", "184724", "Default")));
+
+    AuthTestUtils.requestAs(EINWILLIGER_ERIKA)
+        .when().get(TvdUserController.PATH + "/users")
+        .then().statusCode(200)
+        .body("loginId", hasItems("3365033", "9811215"))
+        .body("name", hasItems("Rüfenacht", "Oberli"));
+  }
+
+  @Test
+  void givenNoAuth_whenQueryUsers_thenUnauthorized() {
+    RestAssured.given()
+        .when().get(TvdUserController.PATH + "/users")
+        .then().statusCode(401);
+  }
+}

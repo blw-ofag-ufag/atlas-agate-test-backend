@@ -380,6 +380,15 @@
       "security-admin-console" : [ ],
       "admin-cli" : [ ],
       "account-console" : [ ],
+      "agate-test-backend" : [ {
+        "id" : "a1130000-0000-4000-8000-0000000000d1",
+        "name" : "Agate_Api_Identitas",
+        "description" : "",
+        "composite" : false,
+        "clientRole" : true,
+        "containerId" : "a1130000-0000-4000-8000-0000000000b1",
+        "attributes" : { }
+      } ],
       "agate" : [ {
         "id" : "5f0b5e45-3c8d-4c1b-8a48-449e8cdf7775",
         "name" : "AgisAdministrator",
@@ -597,6 +606,14 @@
   "webAuthnPolicyPasswordlessAcceptableAaguids" : [ ],
   "webAuthnPolicyPasswordlessExtraOrigins" : [ ],
   "users" : [ {
+    "id" : "a1130000-0000-4000-8000-0000000000e1",
+    "username" : "service-account-agate-test-backend",
+    "enabled" : true,
+    "serviceAccountClientId" : "agate-test-backend",
+    "clientRoles" : {
+      "agate-test-backend" : [ "Agate_Api_Identitas" ]
+    }
+  }, {
     "id" : "27007819-cb9f-4205-be97-c92b9e1df03f",
     "username" : "eid\\5300\\3420018",
     "email" : "andreas.ruettimann@ti8m.ch",
@@ -779,6 +796,57 @@
     } ]
   },
   "clients" : [ {
+    "id" : "a1130000-0000-4000-8000-0000000000b1",
+    "clientId" : "agate-test-backend",
+    "name" : "agate-test-backend",
+    "description" : "",
+    "surrogateAuthRequired" : false,
+    "enabled" : true,
+    "alwaysDisplayInConsole" : false,
+    "clientAuthenticatorType" : "client-secret",
+    "secret" : "agate-test-backend-secret",
+    "redirectUris" : [ ],
+    "webOrigins" : [ ],
+    "notBefore" : 0,
+    "bearerOnly" : false,
+    "consentRequired" : false,
+    "standardFlowEnabled" : false,
+    "implicitFlowEnabled" : false,
+    "directAccessGrantsEnabled" : false,
+    "serviceAccountsEnabled" : true,
+    "publicClient" : false,
+    "frontchannelLogout" : false,
+    "protocol" : "openid-connect",
+    "attributes" : {
+      "realm_client" : "false",
+      "backchannel.logout.session.required" : "true",
+      "standard.token.exchange.enabled" : "false",
+      "display.on.consent.screen" : "false",
+      "oauth2.device.authorization.grant.enabled" : "false",
+      "backchannel.logout.revoke.offline.tokens" : "false",
+      "use.refresh.tokens" : "true",
+      "client_credentials.use_refresh_token" : "false",
+      "dpop.bound.access.tokens" : "false",
+      "exclude.session.state.from.auth.response" : "false"
+    },
+    "authenticationFlowBindingOverrides" : { },
+    "fullScopeAllowed" : true,
+    "nodeReRegistrationTimeout" : -1,
+    "protocolMappers" : [ {
+      "id" : "a1130000-0000-4000-8000-0000000000b2",
+      "name" : "audience-agate-backend",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-audience-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "included.custom.audience" : "agate-backend",
+        "access.token.claim" : "true",
+        "id.token.claim" : "false"
+      }
+    } ],
+    "defaultClientScopes" : [ "auth_time", "agate-test-backend_client_roles" ],
+    "optionalClientScopes" : [ "offline_access", "address", "microprofile-jwt" ]
+  }, {
     "id" : "52adf897-f33d-451d-8800-4d2ad44836a3",
     "clientId" : "account",
     "name" : "${client_account}",
@@ -896,7 +964,7 @@
     "consentRequired" : false,
     "standardFlowEnabled" : true,
     "implicitFlowEnabled" : false,
-    "directAccessGrantsEnabled" : false,
+    "directAccessGrantsEnabled" : true,
     "serviceAccountsEnabled" : false,
     "publicClient" : true,
     "frontchannelLogout" : false,
@@ -2025,6 +2093,34 @@
         "claim.name" : "realm_access.roles",
         "jsonType.label" : "String",
         "usermodel.clientRoleMapping.clientId" : "agate"
+      }
+    } ]
+  }, {
+    "id" : "a1130000-0000-4000-8000-0000000000c1",
+    "name" : "agate-test-backend_client_roles",
+    "description" : "",
+    "protocol" : "openid-connect",
+    "attributes" : {
+      "include.in.token.scope" : "true",
+      "display.on.consent.screen" : "false",
+      "gui.order" : "",
+      "consent.screen.text" : ""
+    },
+    "protocolMappers" : [ {
+      "id" : "a1130000-0000-4000-8000-0000000000c2",
+      "name" : "agate-test-backend-client-roles-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-client-role-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "usermodel.clientRoleMapping.rolePrefix" : "agate.",
+        "multivalued" : "true",
+        "userinfo.token.claim" : "false",
+        "id.token.claim" : "false",
+        "access.token.claim" : "true",
+        "claim.name" : "realm_access.roles",
+        "jsonType.label" : "String",
+        "usermodel.clientRoleMapping.clientId" : "agate-test-backend"
       }
     } ]
   }, {
