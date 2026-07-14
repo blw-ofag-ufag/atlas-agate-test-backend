@@ -116,10 +116,10 @@ mp:
       exclude:
         packages:
           - org.openapitools.api # excludes the automatically generated apis (e.g. AGIS) from the openapi documents
-"%prod":
+"%production":
   quarkus:
     oidc-client:
-      auth-server-url: ${OIDC_AUTH_SERVER_URL:https://backend.blw-agate-dev.pc-core.isceco.admin.ch:8443/idp/realms/agate}
+      auth-server-url: ${OIDC_CLIENT_AUTH_SERVER_URL:https://backend.blw-agate-dev.pc-core.isceco.admin.ch:8443/idp/realms/agate}
       client-id: agate-test-backend
       grant:
         type: client
@@ -129,4 +129,4 @@ mp:
         key-store:
           p12:
             path: ${MTLS_CLIENT_KEYSTORE_PATH:/deployments/certs/agate-client.p12}
-            password: ${MTLS_CLIENT_KEYSTORE_PASSWORD:changeit}
+            password: ${MTLS_CLIENT_KEYSTORE_PASSWORD}
