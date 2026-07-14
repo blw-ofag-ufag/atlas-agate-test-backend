@@ -1,3 +1,9 @@
+## [1.0.0-rc.6](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.5...v1.0.0-rc.6) (2026-07-14)
+
+### Features
+
+* **soap:** add Agate SOAP client and TVD user REST endpoint (A1-113) (#9) ([4f1d094](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/4f1d0941112e1d901336be85db9a34fa551e3ee6)), closes [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113)
+
 ## [1.0.0-rc.5](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.4...v1.0.0-rc.5) (2026-06-03)
 
 ### Features
