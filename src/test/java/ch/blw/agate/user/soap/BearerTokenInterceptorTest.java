@@ -1,6 +1,7 @@
 package ch.blw.agate.user.soap;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -21,7 +22,7 @@ class BearerTokenInterceptorTest {
     Tokens tokens = mock(Tokens.class);
     when(tokens.getAccessToken()).thenReturn("token-abc");
     OidcClient oidcClient = mock(OidcClient.class);
-    when(oidcClient.getTokens()).thenReturn(Uni.createFrom().item(tokens));
+    when(oidcClient.getTokens(anyMap())).thenReturn(Uni.createFrom().item(tokens));
 
     Message message = new MessageImpl();
     new BearerTokenInterceptor(oidcClient).handleMessage(message);

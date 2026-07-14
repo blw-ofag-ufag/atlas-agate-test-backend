@@ -1,6 +1,7 @@
 package ch.blw.agate.user.soap;
 
 import io.quarkus.oidc.client.OidcClient;
+import io.quarkus.oidc.client.runtime.TokensHelper;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
@@ -16,6 +17,7 @@ import org.apache.cxf.phase.Phase;
 public class BearerTokenInterceptor extends AbstractPhaseInterceptor<Message> {
 
   private final OidcClient oidcClient;
+  private final TokensHelper tokens = new TokensHelper();
 
   @Inject
   public BearerTokenInterceptor(OidcClient oidcClient) {
@@ -26,7 +28,7 @@ public class BearerTokenInterceptor extends AbstractPhaseInterceptor<Message> {
   @Override
   @SuppressWarnings("unchecked")
   public void handleMessage(Message message) {
-    String accessToken = oidcClient.getTokens().await().indefinitely().getAccessToken();
+    String accessToken = tokens.getTokens(oidcClient).await().indefinitely().getAccessToken();
 
     Map<String, List<String>> headers = (Map<String, List<String>>) message.computeIfAbsent(
         Message.PROTOCOL_HEADERS, key -> new TreeMap<String, List<String>>(String.CASE_INSENSITIVE_ORDER));
