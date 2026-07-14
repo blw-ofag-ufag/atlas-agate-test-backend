@@ -123,6 +123,7 @@ mp:
       client-id: agate-test-backend
       discovery-enabled: false
       token-path: /protocol/openid-connect/token
+      jwks-path: /protocol/openid-connect/certs
       grant:
         type: client
       tls:
