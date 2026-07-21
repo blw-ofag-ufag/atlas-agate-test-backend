@@ -1,3 +1,9 @@
+## [1.0.0-rc.7](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.6...v1.0.0-rc.7) (2026-07-21)
+
+### Bug Fixes
+
+* **oidc-client:** attach mTLS config and harden startup against IdP outage (A1-113) (#10) ([d71c38d](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/d71c38df2f61873de4dd465ec178e3158e9b30de)), closes [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113)
+
 ## [1.0.0-rc.6](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.5...v1.0.0-rc.6) (2026-07-14)
 
 ### Features
