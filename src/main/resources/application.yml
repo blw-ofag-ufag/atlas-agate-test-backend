@@ -121,9 +121,15 @@ mp:
     oidc-client:
       auth-server-url: ${OIDC_CLIENT_AUTH_SERVER_URL:https://backend.blw-agate-dev.pc-core.isceco.admin.ch:8443/idp/realms/agate}
       client-id: agate-test-backend
+      scopes:
+        - openid
+      discovery-enabled: false
+      token-path: /protocol/openid-connect/token
+      jwks-path: /protocol/openid-connect/certs
       grant:
         type: client
-      tls-configuration-name: agate-mtls
+      tls:
+        tls-configuration-name: agate-mtls
     tls:
       agate-mtls:
         key-store:
