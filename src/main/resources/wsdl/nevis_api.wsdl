@@ -19,6 +19,14 @@
         <wsdl:part name="parameters" element="xsns:queryUsersResponse"
                    xmlns:xsns="http://adnovum.ch/nevisidm/ws/services/v1"/>
     </wsdl:message>
+    <wsdl:message name="getUsersByLoginId">
+        <wsdl:part name="parameters" element="xsns:getUsersByLoginId"
+                   xmlns:xsns="http://adnovum.ch/nevisidm/ws/services/v1"/>
+    </wsdl:message>
+    <wsdl:message name="getUsersByLoginIdResponse">
+        <wsdl:part name="parameters" element="xsns:getUsersByLoginIdResponse"
+                   xmlns:xsns="http://adnovum.ch/nevisidm/ws/services/v1"/>
+    </wsdl:message>
     <wsdl:message name="BusinessException">
         <wsdl:part name="fault" element="xsns:BusinessException"
                    xmlns:xsns="http://adnovum.ch/nevisidm/ws/services/v1"/>
@@ -35,6 +43,12 @@
             <wsdl:fault name="BusinessException" message="ns0:BusinessException"/>
             <wsdl:fault name="TechnicalException" message="ns0:TechnicalException"/>
         </wsdl:operation>
+        <wsdl:operation name="getUsersByLoginId">
+            <wsdl:input name="getUsersByLoginIdRequest" message="ns0:getUsersByLoginId"/>
+            <wsdl:output name="getUsersByLoginIdResponse" message="ns0:getUsersByLoginIdResponse"/>
+            <wsdl:fault name="BusinessException" message="ns0:BusinessException"/>
+            <wsdl:fault name="TechnicalException" message="ns0:TechnicalException"/>
+        </wsdl:operation>
     </wsdl:portType>
 
     <wsdl:binding name="AdminServicePortBinding" type="ns0:AdminService">
@@ -45,6 +59,21 @@
                 <soap11:body use="literal"/>
             </wsdl:input>
             <wsdl:output name="queryUsersResponse">
+                <soap11:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="BusinessException">
+                <soap11:fault name="BusinessException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="TechnicalException">
+                <soap11:fault name="TechnicalException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getUsersByLoginId">
+            <soap11:operation soapAction="" style="document"/>
+            <wsdl:input name="getUsersByLoginIdRequest">
+                <soap11:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getUsersByLoginIdResponse">
                 <soap11:body use="literal"/>
             </wsdl:output>
             <wsdl:fault name="BusinessException">
