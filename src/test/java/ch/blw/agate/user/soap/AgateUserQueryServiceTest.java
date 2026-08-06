@@ -59,6 +59,40 @@ class AgateUserQueryServiceTest {
   }
 
   @Test
+  void buildGetByLoginId_addsLoginIds() {
+    var get = AgateUserQueryService.buildGetByLoginId(List.of("3365033", "9811215"));
+
+    assertThat(get.getLoginIds()).containsExactly("3365033", "9811215");
+  }
+
+  @Test
+  void buildGetByLoginId_withNull_yieldsEmptyLoginIds() {
+    assertThat(AgateUserQueryService.buildGetByLoginId(null).getLoginIds()).isEmpty();
+  }
+
+  @Test
+  void getUsersByLoginId_mapsClientResponseToDtos() throws Exception {
+    AdminService client = mock(AdminService.class);
+    when(client.getUsersByLoginId(any()))
+        .thenReturn(List.of(user("3365033", "Ramon", "Rüfenacht", "184723")));
+
+    List<TvdUserDto> dtos = new AgateUserQueryService(client).getUsersByLoginId(List.of("3365033"));
+
+    assertThat(dtos).extracting(TvdUserDto::loginId).containsExactly("3365033");
+    assertThat(dtos).extracting(TvdUserDto::name).containsExactly("Rüfenacht");
+  }
+
+  @Test
+  void getUsersByLoginId_wrapsSoapFaultInExternalWebServiceException() throws Exception {
+    AdminService client = mock(AdminService.class);
+    when(client.getUsersByLoginId(any())).thenThrow(new BusinessException("boom"));
+    AgateUserQueryService service = new AgateUserQueryService(client);
+
+    assertThatThrownBy(() -> service.getUsersByLoginId(List.of("3365033")))
+        .isInstanceOf(ExternalWebServiceException.class);
+  }
+
+  @Test
   void toDto_mapsUnmarshalledResponseFromSampleXml() throws Exception {
     List<User> users = unmarshalSampleResponse().getReturn();
 

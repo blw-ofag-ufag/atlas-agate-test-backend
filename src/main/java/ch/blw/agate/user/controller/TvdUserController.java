@@ -7,6 +7,7 @@ import io.smallrye.common.annotation.RunOnVirtualThread;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -32,5 +33,15 @@ public class TvdUserController {
   @Produces(MediaType.APPLICATION_JSON)
   public List<TvdUserDto> queryUsers() {
     return agateUserQueryService.queryUsers();
+  }
+
+  @GET
+  @Path("/users/by-login-id")
+  @Operation(
+      operationId = "getTvdUsersByLoginId",
+      description = "Fetches users from the Agate SOAP API (getUsersByLoginId) by loginId and returns them as DTOs.")
+  @Produces(MediaType.APPLICATION_JSON)
+  public List<TvdUserDto> getUsersByLoginId(@QueryParam("loginId") List<String> loginIds) {
+    return agateUserQueryService.getUsersByLoginId(loginIds);
   }
 }

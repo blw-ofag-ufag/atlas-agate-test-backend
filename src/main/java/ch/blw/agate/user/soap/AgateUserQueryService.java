@@ -6,6 +6,7 @@ import ch.blw.agate.user.soap.generated.AdminService;
 import ch.blw.agate.user.soap.generated.BusinessException;
 import ch.blw.agate.user.soap.generated.TechnicalException;
 import ch.blw.agate.user.soap.generated.User;
+import ch.blw.agate.user.soap.generated.UserGetByLoginId;
 import ch.blw.agate.user.soap.generated.UserQuery;
 import io.quarkiverse.cxf.annotation.CXFClient;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -32,11 +33,28 @@ public class AgateUserQueryService {
     }
   }
 
+  public List<TvdUserDto> getUsersByLoginId(List<String> loginIds) {
+    try {
+      return adminService.getUsersByLoginId(buildGetByLoginId(loginIds)).stream()
+          .map(AgateUserQueryService::toDto).toList();
+    } catch (BusinessException | TechnicalException e) {
+      throw new ExternalWebServiceException("Agate SOAP getUsersByLoginId failed", e);
+    }
+  }
+
   static UserQuery buildQuery() {
     UserQuery query = new UserQuery();
     query.setNumRecords(DEFAULT_NUM_RECORDS);
     query.setUser(new User());
     return query;
+  }
+
+  static UserGetByLoginId buildGetByLoginId(List<String> loginIds) {
+    UserGetByLoginId get = new UserGetByLoginId();
+    if (loginIds != null) {
+      get.getLoginIds().addAll(loginIds);
+    }
+    return get;
   }
 
   static TvdUserDto toDto(User user) {
