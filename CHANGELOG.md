@@ -1,3 +1,9 @@
+## [1.0.0-rc.8](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.7...v1.0.0-rc.8) (2026-08-06)
+
+### Features
+
+* **soap:** expose getUsersByLoginId via REST for test automation (A1-172) (#11) ([8b82966](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/8b82966b9a3f6903ec60e050bb8daf184e4fe798)), closes [A1-172](https://blw-ofag-ufag.atlassian.net/browse/A1-172)
+
 ## [1.0.0-rc.7](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.6...v1.0.0-rc.7) (2026-07-21)
 
 ### Bug Fixes
