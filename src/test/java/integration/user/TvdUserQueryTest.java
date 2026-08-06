@@ -39,4 +39,25 @@ class TvdUserQueryTest {
         .when().get(TvdUserController.PATH + "/users")
         .then().statusCode(401);
   }
+
+  @Test
+  void givenAuthUser_whenGetUsersByLoginId_thenReturnsMappedDtos() {
+    when(agateUserQueryService.getUsersByLoginId(List.of("3365033"))).thenReturn(List.of(
+        new TvdUserDto("3365033", "Ramon", "Rüfenacht", "184723", "Default")));
+
+    AuthTestUtils.requestAs(EINWILLIGER_ERIKA)
+        .queryParam("loginId", "3365033")
+        .when().get(TvdUserController.PATH + "/users/by-login-id")
+        .then().statusCode(200)
+        .body("loginId", hasItems("3365033"))
+        .body("name", hasItems("Rüfenacht"));
+  }
+
+  @Test
+  void givenNoAuth_whenGetUsersByLoginId_thenUnauthorized() {
+    RestAssured.given()
+        .queryParam("loginId", "3365033")
+        .when().get(TvdUserController.PATH + "/users/by-login-id")
+        .then().statusCode(401);
+  }
 }
