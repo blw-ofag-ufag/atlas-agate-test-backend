@@ -615,7 +615,7 @@
     }
   }, {
     "id" : "27007819-cb9f-4205-be97-c92b9e1df03f",
-    "username" : "eid\\5300\\3420018",
+    "username" : "eid53003420018",
     "email" : "andreas.ruettimann@ti8m.ch",
     "emailVerified" : true,
     "attributes" : {
@@ -644,7 +644,7 @@
     "groups" : [ ]
   }, {
     "id" : "62f67166-ff35-4b56-801d-96437834b364",
-    "username" : "eid\\9000\\0000001",
+    "username" : "eid90000000001",
     "email" : "blw.test.producer.erika@proton.me",
     "emailVerified" : true,
     "attributes" : {
@@ -676,7 +676,7 @@
     "groups" : [ ]
   }, {
     "id" : "8afc4e6a-6d44-4e52-b0e7-366f3ca8dec1",
-    "username" : "eid\\9000\\0000002",
+    "username" : "eid90000000002",
     "email" : "blw.test.producer.lukas@proton.me",
     "emailVerified" : true,
     "attributes" : {
