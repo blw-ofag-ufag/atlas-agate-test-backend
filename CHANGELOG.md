@@ -1,3 +1,9 @@
+## [1.0.0-rc.9](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.8...v1.0.0-rc.9) (2026-08-17)
+
+### Bug Fixes
+
+* **test:** align seed usernames to backslash-free brokered form (A1-189) (#13) ([dfaa3e5](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/dfaa3e54d0b2dd9d056c7b71e2489491f2ca2bbd)), closes [A1-189](https://blw-ofag-ufag.atlassian.net/browse/A1-189)
+
 ## [1.0.0-rc.8](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.7...v1.0.0-rc.8) (2026-08-06)
 
 ### Features
