@@ -987,6 +987,230 @@
     "fullScopeAllowed" : true,
     "nodeReRegistrationTimeout" : -1,
     "protocolMappers" : [ {
+      "id" : "c3997440-4d9e-4dfb-b8af-da0ce673974d",
+      "name" : "COMEAV_ID-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "COMEAV_ID",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "COMEAV_ID",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "6090ea0b-5294-4083-a226-2d55369d8594",
+      "name" : "birthDate-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "birthDate",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "birthDate",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "6f5ba921-aed3-4460-a8e4-d720cc750090",
+      "name" : "cantonOfFarm-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "cantonOfFarm",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "cantonOfFarm",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "721e3321-f959-483a-9a58-cda57a62b08c",
+      "name" : "city-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "city",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "city",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "68e8bd02-b8bb-419a-a327-357e1fbe82a4",
+      "name" : "country-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "country",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "country",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "993e54ba-5907-4414-b3f4-600001a72b61",
+      "name" : "houseNumber-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "houseNumber",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "houseNumber",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "57804f06-fb78-4b65-9eae-e51da1b540f8",
+      "name" : "language-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "language",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "language",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "5ecb97ab-fb02-4e0a-8810-982f65ada954",
+      "name" : "mobile-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "mobile",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "mobile",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "63a9642d-0255-4be4-8b4e-33fac40405df",
+      "name" : "postOfficeBoxNumber-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "postOfficeBoxNumber",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "postOfficeBoxNumber",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "98d8dfb7-43b2-4458-9385-09b783248439",
+      "name" : "postOfficeBoxText-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "postOfficeBoxText",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "postOfficeBoxText",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "805f1899-87d4-4078-bbc8-76f2b39a9e21",
+      "name" : "postalCode-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "postalCode",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "postalCode",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "40acff48-0462-48ce-9af5-08d72a75e329",
+      "name" : "street-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "street",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "street",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "040689d8-de72-45a1-8660-6eaafecc4382",
+      "name" : "telephone-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "telephone",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "telephone",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "b9d8b2b5-4b14-4712-8326-8a10b035956e",
+      "name" : "title-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "title",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "title",
+        "jsonType.label" : "String"
+      }
+    }, {
       "id" : "5967bb68-4241-4dca-8c26-8b3f2970b29c",
       "name" : "family_name-mapper",
       "protocol" : "openid-connect",
@@ -1265,6 +1489,230 @@
     "fullScopeAllowed" : true,
     "nodeReRegistrationTimeout" : -1,
     "protocolMappers" : [ {
+      "id" : "e0d6b64d-1327-4ee0-b5c8-deeb6f268837",
+      "name" : "COMEAV_ID-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "COMEAV_ID",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "COMEAV_ID",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "6b2a70fb-e10b-4fad-ac09-a4cc43190bf9",
+      "name" : "birthDate-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "birthDate",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "birthDate",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "746a6a78-2847-4fee-a0d1-a5fa9898e990",
+      "name" : "cantonOfFarm-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "cantonOfFarm",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "cantonOfFarm",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "777a2759-0819-44e7-b7be-613c942c261e",
+      "name" : "city-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "city",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "city",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "4a3c2f9f-28b6-4856-94ca-6bccecc0e55e",
+      "name" : "country-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "country",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "country",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "27bf3f65-f090-4f81-9413-75cacdda82fc",
+      "name" : "houseNumber-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "houseNumber",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "houseNumber",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "0c61d8e7-d563-40ee-8074-27e52778a8c3",
+      "name" : "language-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "language",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "language",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "ffde8f39-73e7-4986-baec-6186dfbc10f5",
+      "name" : "mobile-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "mobile",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "mobile",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "b75b6287-e462-4586-9aee-26220c83085e",
+      "name" : "postOfficeBoxNumber-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "postOfficeBoxNumber",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "postOfficeBoxNumber",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "6c86922c-2148-4198-bd0b-0183e1850538",
+      "name" : "postOfficeBoxText-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "postOfficeBoxText",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "postOfficeBoxText",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "81ff2b32-132a-492f-91c1-cbfbcf07b46e",
+      "name" : "postalCode-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "postalCode",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "postalCode",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "76e2f058-ab20-41d8-a1a0-dc65a9a90e67",
+      "name" : "street-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "street",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "street",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "155a2159-06da-4fc5-a6c5-fd3f081a330a",
+      "name" : "telephone-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "telephone",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "telephone",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "ec3b1c15-2c32-4ba9-8445-9885732293b9",
+      "name" : "title-mapper",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "title",
+        "id.token.claim" : "false",
+        "access.token.claim" : "false",
+        "claim.name" : "title",
+        "jsonType.label" : "String"
+      }
+    }, {
       "id" : "2a3937fc-3018-4ea1-835d-696a8faf6247",
       "name" : "acr-mapper",
       "protocol" : "openid-connect",
@@ -2723,7 +3171,7 @@
       "providerId" : "declarative-user-profile",
       "subComponents" : { },
       "config" : {
-        "kc.user.profile.config" : [ "{\"attributes\":[{\"name\":\"KT_ID_P\",\"displayName\":\"KT_ID_P\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"acr\",\"displayName\":\"acr\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"email\",\"displayName\":\"email\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"extId\",\"displayName\":\"extId\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"family_name\",\"displayName\":\"family_name\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"given_name\",\"displayName\":\"given_name\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"loginid\",\"displayName\":\"loginid\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"org_ids\",\"displayName\":\"org_ids\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"phone_number\",\"displayName\":\"phone_number\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"roles\",\"displayName\":\"roles\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":true},{\"name\":\"sub\",\"displayName\":\"sub\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"sub_eiam\",\"displayName\":\"sub_eiam\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"uid\",\"displayName\":\"uid\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"username\",\"displayName\":\"username\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false}],\"groups\":[]}" ]
+        "kc.user.profile.config" : [ "{\"attributes\":[{\"name\":\"COMEAV_ID\",\"displayName\":\"COMEAV_ID\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"KT_ID_P\",\"displayName\":\"KT_ID_P\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"acr\",\"displayName\":\"acr\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"birthDate\",\"displayName\":\"birthDate\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"cantonOfFarm\",\"displayName\":\"cantonOfFarm\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"city\",\"displayName\":\"city\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"country\",\"displayName\":\"country\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"email\",\"displayName\":\"email\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"extId\",\"displayName\":\"extId\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"family_name\",\"displayName\":\"family_name\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"given_name\",\"displayName\":\"given_name\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"houseNumber\",\"displayName\":\"houseNumber\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"language\",\"displayName\":\"language\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"loginid\",\"displayName\":\"loginid\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"mobile\",\"displayName\":\"mobile\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"org_ids\",\"displayName\":\"org_ids\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"phone_number\",\"displayName\":\"phone_number\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"postOfficeBoxNumber\",\"displayName\":\"postOfficeBoxNumber\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"postOfficeBoxText\",\"displayName\":\"postOfficeBoxText\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"postalCode\",\"displayName\":\"postalCode\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"roles\",\"displayName\":\"roles\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":true},{\"name\":\"street\",\"displayName\":\"street\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"sub\",\"displayName\":\"sub\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"sub_eiam\",\"displayName\":\"sub_eiam\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"telephone\",\"displayName\":\"telephone\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"title\",\"displayName\":\"title\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"uid\",\"displayName\":\"uid\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"username\",\"displayName\":\"username\",\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false}],\"groups\":[]}" ]
       }
     } ],
     "org.keycloak.keys.KeyProvider" : [ {
