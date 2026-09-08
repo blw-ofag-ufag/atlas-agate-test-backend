@@ -1,0 +1,15 @@
+# Extends the default gitleaks rules. The Keycloak test-realm fixture
+# (src/test/resources/agate-realm.json) deliberately carries placeholder secrets — the export is
+# scrubbed before committing (see atlas-agate-local, README "Updating agate-realm.json"). Allowlist
+# exactly those placeholder values, so a real secret leaking into the fixture is still detected.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Documented placeholder secrets in the Keycloak test-realm fixture"
+regexTarget = "match"
+regexes = [
+  '''local-dummy-secret''',
+  '''agate-test-backend-secret''',
+  '''replace-with-eiam-client-secret''',
+]
