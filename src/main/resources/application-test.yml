@@ -6,6 +6,9 @@ quarkus:
   keycloak:
     devservices:
       realm-path: agate-realm.json
+      # Pin to the Keycloak version deployed to dev/prod: agate-realm.json is exported from that
+      # version, and an older devservice Keycloak rejects its newer fields (e.g. webAuthnPolicyResidentKey).
+      image-name: quay.io/keycloak/keycloak:26.7.3
       start-timeout: 300s
   #  cxf:
   #    client:
