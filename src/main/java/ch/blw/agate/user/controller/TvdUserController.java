@@ -21,7 +21,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 @Authenticated
 public class TvdUserController {
 
-  public static final String PATH = "/api/tvd/v1";
+  public static final String PATH = "/api/tvd";
 
   private final AgateUserQueryService agateUserQueryService;
 

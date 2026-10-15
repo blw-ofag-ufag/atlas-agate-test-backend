@@ -1,6 +1,6 @@
-### get self
-GET {{baseUrl}}/user/v1/user-token
-Authorization: Bearer {{$auth.token("producer")}}
+### get user token
+GET {{baseUrl}}/api/user/user-token
+Authorization: Bearer {{$auth.token("biosuisse")}}
 Content-Type: application/json
 
 > {%
@@ -10,3 +10,37 @@ Content-Type: application/json
     })
 %}
 
+### get user info
+GET {{baseUrl}}/api/user/user-info
+Authorization: Bearer {{$auth.token("biosuisse")}}
+Content-Type: application/json
+
+> {%
+    client.test("Get user info", function () {
+        client.assert(response.status === 200, "Expected Response status is 200, got: " + response.status)
+        client.assert(response.body !== null, "Expected Response to contain user info")
+    })
+%}
+
+### get producer info (requires Agridata_Einwilliger)
+GET {{baseUrl}}/api/user/producer-info
+Authorization: Bearer {{$auth.token("erika")}}
+Content-Type: application/json
+
+> {%
+    client.test("Get producer info", function () {
+        client.assert(response.status === 200, "Expected Response status is 200, got: " + response.status)
+        client.assert(response.body.role === "producer", "Expected role producer, got: " + response.body.role)
+    })
+%}
+
+### query TVD users (proxied to the Agate SOAP API)
+GET {{baseUrl}}/api/tvd/users
+Authorization: Bearer {{$auth.token("biosuisse")}}
+Content-Type: application/json
+
+> {%
+    client.test("Query TVD users", function () {
+        client.assert(response.status === 200, "Expected Response status is 200, got: " + response.status)
+    })
+%}

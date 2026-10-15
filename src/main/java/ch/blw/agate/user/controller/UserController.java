@@ -28,7 +28,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 @Authenticated
 public class UserController {
 
-  public static final String PATH = "/api/user/v1";
+  public static final String PATH = "/api/user";
 
   private final AuthenticationService authenticationService;
 
