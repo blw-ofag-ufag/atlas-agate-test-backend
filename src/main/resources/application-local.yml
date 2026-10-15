@@ -23,61 +23,85 @@ quarkus:
   #  flyway:
   #    locations:
   #      - classpath:db/migration
+  cxf:
+    client:
+      adminService:
+        client-endpoint-url: ${SOAP_ENDPOINT_URL:http://localhost:8901/backend/soap/AdminService/v1_44}
   http:
     cors:
       origins:
         - http://localhost:4200
   keycloak:
+    # Embedded Keycloak with the Agate realm on a fixed port (replaces the docker-compose setup from
+    # atlas-agate-local). realm-path is resolved on the classpath first, then on the file system — the
+    # file lives under src/test/resources, hence the relative path (works when dev mode runs from the
+    # module root). The container is shared, so atlas-agate-backend started locally reuses it.
     devservices:
-      enabled: false
-#      port: 6999
-#      realm-path: agate_realm.json
+      enabled: true
+      port: 6999
+      realm-path: src/test/resources/agate-realm.json
   log:
-    console:
-      json:
+    json:
+      console:
         enabled: false
     category:
       ch.blw.agate.common.filters:
-        level: DEBUG
+        level: info
       io.quarkiverse.wiremock.devservice.WireMockServer:
         level: WARN
       io.quarkus.oidc.client:
-        level: DEBUG
+        level: WARN
       io.quarkus.rest.client:
-        level: DEBUG
+        level: WARN
       org.jboss.resteasy.reactive.client.logging:
         level: WARN
       org.jboss.resteasy.reactive.server.logging:
         level: WARN
       ch.blw.agate.common.filters.RestClientLoggingFilter:
-        level: DEBUG
-    level: DEBUG
+        level: info
+    level: info
+
+  # We use 2 oidc tenants to verify simultaneous access to the backend. This is prerequisite because when migrating from old to new agate there will be period where both tenants are active.
   oidc:
     resolve-tenants-with-issuer: true
-    agate-new:
-      auth-server-url: https://backend.blw-agate-dev.pc-core.isceco.admin.ch/idp/realms/agate
+    agate-local:
+      auth-server-url: http://localhost:6999/realms/agate
       application-type: service
+      authentication:
+        user-info-required: true
       token:
         audience: agridata-backend
-    agate-old:
-      auth-server-url: http://localhost:9999/realms/agate    #auth-server-url: https://backend.blw-agate-dev.pc-core.isceco.admin.ch/idp/realms/agate
+    agate-dev:
+      auth-server-url: https://backend.blw-agate-dev.pc-core.isceco.admin.ch/idp/realms/agate
       application-type: service
+      authentication:
+        user-info-required: true
       token:
         audience: agridata-backend
 
-    # oidc-client:
-    #  agis-api:
-    #   token-path: http://localhost:9999/agate/token
+
+  # The SOAP client fetches its token from the Keycloak Dev Service (client tvd-agate-api carries the
+  # agate.Agate_Api_Identitas role required by the SOAP endpoint), so run atlas-agate-backend locally
+  # alongside or point SOAP_ENDPOINT_URL elsewhere.
+  oidc-client:
+    auth-server-url: http://localhost:6999/realms/agate
+    client-id: tvd-agate-api
+    credentials:
+      secret: secret
+    grant:
+      type: client
   #  rest-client:
   #    agis-register-api:
   #      url: http://localhost:8050/agis/register-data/1
   #    logging:
   #      body-limit: 10240
   #      scope: request-response
+  smallrye-openapi:
+    oidc-open-id-connect-url: http://localhost:6999/realms/agate/.well-known/openid-configuration
   swagger-ui:
     oauth-client-id: agate
-#  wiremock:
-#    devservices:
-#      enabled: true
-#      files-mapping: src/test/resources/wiremock
-#      port: 8050
+  observability:
+    # quarkus-opentelemetry pulls in the Grafana LGTM Dev Service in dev mode, which starts a container
+    # and redirects the OTel exporter to it. Not needed while traces are only used for log correlation.
+    enabled: false
+

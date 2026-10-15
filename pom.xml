@@ -8,27 +8,27 @@
     <packaging>quarkus</packaging>
 
     <properties>
-        <compiler-plugin.version>3.15.0</compiler-plugin.version>
+        <compiler-plugin.version>3.16.0</compiler-plugin.version>
         <maven.compiler.release>25</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>3.38.0</quarkus.platform.version>
-        <quarkus-cxf.version>3.38.0</quarkus-cxf.version>
-        <dependency-check-maven.version>12.2.0</dependency-check-maven.version>
-        <lombok.version>1.18.44</lombok.version>
+        <quarkus.platform.version>3.40.1</quarkus.platform.version>
+        <quarkus-cxf.version>3.40.3</quarkus-cxf.version>
+        <dependency-check-maven.version>13.0.0</dependency-check-maven.version>
+        <lombok.version>1.18.48</lombok.version>
         <mapstruct.version>1.6.3</mapstruct.version> <!-- or latest -->
         <assertj.version>3.27.7</assertj.version>
 
-        <surefire-plugin.version>3.5.5</surefire-plugin.version>
-        <sonar-maven-plugin.version>5.5.0.6356</sonar-maven-plugin.version>
+        <surefire-plugin.version>3.6.0</surefire-plugin.version>
+        <sonar-maven-plugin.version>5.8.0.7211</sonar-maven-plugin.version>
         <sonar.organization>bundesamt-fur-landwirtschaft-blw</sonar.organization>
         <sonar.projectKey>blw-ofag-ufag_atlas-agate-test-backend</sonar.projectKey>
-        <checkstyle.version>13.3.0</checkstyle.version>
+        <checkstyle.version>14.3.0</checkstyle.version>
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
-        <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
-        <openapi-generator.version>7.17.0</openapi-generator.version>
+        <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
+        <quarkus-loggingjson.version>3.5.0</quarkus-loggingjson.version>
 
         <sonar.exclusions>**/generated/**</sonar.exclusions>
         <sonar.coverage.exclusions>**/generated/**</sonar.coverage.exclusions>
@@ -65,12 +65,10 @@
                 <artifactId>assertj-core</artifactId>
                 <version>${assertj.version}</version>
             </dependency>
-            <!--            used to generate apis from openapi configuration-->
             <dependency>
-                <groupId>org.openapitools</groupId>
-                <artifactId>openapi-generator</artifactId>
-                <version>${openapi-generator.version}</version>
-                <scope>provided</scope>
+                <groupId>io.quarkiverse.loggingjson</groupId>
+                <artifactId>quarkus-logging-json</artifactId>
+                <version>${quarkus-loggingjson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -97,10 +95,6 @@
             <artifactId>quarkus-cxf</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-        <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-smallrye-health</artifactId>
         </dependency>
@@ -112,6 +106,10 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-micrometer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-opentelemetry</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -138,15 +136,11 @@
             <artifactId>quarkus-smallrye-openapi</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.openapitools</groupId>
-            <artifactId>openapi-generator</artifactId>
-        </dependency>
-        <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-virtual-threads</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.quarkus</groupId>
+            <groupId>io.quarkiverse.loggingjson</groupId>
             <artifactId>quarkus-logging-json</artifactId>
         </dependency>
         <dependency>

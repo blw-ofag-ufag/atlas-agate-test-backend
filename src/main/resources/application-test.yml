@@ -20,7 +20,7 @@ quarkus:
   log:
     level: WARN
     category:
-      ch.agridata.common.filters:
+      ch.blw.agate.common.filters:
         level: WARN
 #  oidc-client:
 #    agis-api:

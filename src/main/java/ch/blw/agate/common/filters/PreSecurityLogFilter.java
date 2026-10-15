@@ -1,5 +1,7 @@
 package ch.blw.agate.common.filters;
 
+import static io.quarkiverse.loggingjson.providers.KeyValueStructuredArgument.kv;
+
 import io.quarkus.vertx.web.RouteFilter;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpMethod;
@@ -8,7 +10,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.slf4j.event.Level;
 
@@ -16,7 +17,8 @@ import org.slf4j.event.Level;
  * Logs incoming requests and outgoing responses with configurable filters. It avoids logging sensitive or large binary payloads while
  * ensuring visibility into API interactions.
  *
- * @CommentLastReviewed 2025-10-15
+ * <p>Each detail is emitted as a dedicated JSON property via {@code kv(...)} structured arguments,
+ * keeping the log message itself clean.</p>
  */
 
 @Slf4j
@@ -28,6 +30,8 @@ public class PreSecurityLogFilter {
   public static final String URI = "uri";
   public static final String CONTENT_TYPE = "contentType";
   public static final String BODY = "body";
+  public static final String STATUS = "status";
+  public static final String DURATION = "duration";
 
   @ConfigProperty(name = "quarkus.http.root-path", defaultValue = "")
   String contextRoot;
@@ -67,15 +71,15 @@ public class PreSecurityLogFilter {
       if (log.isEnabledForLevel(Level.DEBUG) && !contentTypeIsBinary(ctx)) {
         logRequestWithBody(ctx);
       } else {
-        var logBuilder = log.atInfo()
-            .addKeyValue(OPERATION, "rest.request")
-            .addKeyValue(METHOD, ctx.request().method())
-            .addKeyValue(URI, uriWithQuery)
-            .addKeyValue(CONTENT_TYPE, getContentType(ctx));
+        String method = ctx.request().method().name();
 
-
-        logBuilder.log("REQUEST: {} {} {} {}", ctx.request().method(), uriWithQuery,
-            getContentType(ctx), ctx.request().query());
+        log.info("rest.request {} {}",
+            method,
+            uriWithQuery,
+            kv(OPERATION, "rest.request"),
+            kv(METHOD, method),
+            kv(URI, uriWithQuery),
+            kv(CONTENT_TYPE, getContentType(ctx)));
       }
       logResponse(ctx);
     }
@@ -84,20 +88,17 @@ public class PreSecurityLogFilter {
 
   private void logRequestWithBody(RoutingContext ctx) {
     ctx.request().bodyHandler(buffer -> {
-      String bodyString = buffer.toString();
+      String method = ctx.request().method().name();
       String uriWithQuery = getUriWithQuery(ctx);
 
-      var logBuilder = log.atDebug()
-          .addKeyValue(OPERATION, "rest.request")
-          .addKeyValue(METHOD, ctx.request().method())
-          .addKeyValue(URI, uriWithQuery)
-          .addKeyValue(CONTENT_TYPE, getContentType(ctx))
-          .addKeyValue(BODY, bodyString);
-
-      logBuilder.log("REQUEST: {} {} {}", ctx.request().method(),
-          uriWithQuery, getContentType(ctx));
-
-      logResponse(ctx);
+      log.debug("rest.request {} {}",
+          method,
+          uriWithQuery,
+          kv(OPERATION, "rest.request"),
+          kv(METHOD, method),
+          kv(URI, uriWithQuery),
+          kv(CONTENT_TYPE, getContentType(ctx)),
+          kv(BODY, buffer.toString()));
     });
   }
 
@@ -107,15 +108,18 @@ public class PreSecurityLogFilter {
       Long startTime = ctx.get(START_TIME_KEY);
       long duration = startTime != null ? System.currentTimeMillis() - startTime : -1;
       String uriWithQuery = getUriWithQuery(ctx);
+      String method = ctx.request().method().name();
 
-      log.atInfo()
-          .addKeyValue(OPERATION, "rest.response")
-          .addKeyValue(METHOD, ctx.request().method())
-          .addKeyValue(URI, uriWithQuery)
-          .addKeyValue("status", status)
-          .addKeyValue("duration", duration)
-          .log("RESPONSE: {} {} status: {} duration: {} ms", ctx.request().method(),
-              uriWithQuery, status, duration);
+      log.info("rest.response {} {} -> {} ({} ms)",
+          method,
+          uriWithQuery,
+          status,
+          duration,
+          kv(OPERATION, "rest.response"),
+          kv(METHOD, method),
+          kv(URI, uriWithQuery),
+          kv(STATUS, status),
+          kv(DURATION, duration));
     });
   }
 
@@ -144,12 +148,12 @@ public class PreSecurityLogFilter {
 
   private boolean contentTypeIsBinary(RoutingContext ctx) {
     String contentType = getContentType(ctx);
-    if (StringUtils.isBlank(contentType)) {
+    if (contentType.isBlank()) {
       return false;
     }
     String ct = contentType.toLowerCase(Locale.ROOT);
     return CONTENT_TYPE_LOG_BLACKLIST.stream()
-        .anyMatch(binaryContentType -> binaryContentType.startsWith(ct));
+        .anyMatch(ct::startsWith);
   }
 
 

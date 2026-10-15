@@ -1,13 +1,13 @@
 package ch.blw.agate.common;
 
 
-import static ch.blw.agate.common.filters.PreSecurityMdcFilter.REQUEST_ID_MDC_FIELD;
-
 import ch.blw.agate.common.dto.ExceptionDto;
 import ch.blw.agate.common.dto.ExceptionEnum;
 import ch.blw.agate.common.dto.ExternalServiceExceptionDto;
 import ch.blw.agate.common.exceptions.ExternalWebServiceException;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.SpanContext;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
@@ -18,7 +18,6 @@ import jakarta.ws.rs.core.Response.Status;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.jboss.logging.MDC;
 import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
 
 /**
@@ -124,7 +123,7 @@ public class ExceptionHandler {
     var errorBuilder = ExceptionDto.builder()
         .message(message)
         .type(type)
-        .requestId(MDC.get(REQUEST_ID_MDC_FIELD).toString());
+        .traceId(currentTraceId());
     if (returnDebug) {
       errorBuilder.debugMessage(debugMessage);
     }
@@ -136,11 +135,21 @@ public class ExceptionHandler {
         .message(message)
         .status(status)
         .type(ExceptionEnum.EXTERNAL_SERVICE_ERROR)
-        .requestId(MDC.get(REQUEST_ID_MDC_FIELD).toString());
+        .traceId(currentTraceId());
     if (returnDebug) {
       errorBuilder.debugMessage(debugMessage);
     }
     return errorBuilder.build();
+  }
+
+  /**
+   * Returns the OpenTelemetry trace id of the current request, or {@code null} when no valid span is
+   * active. This is the same id that appears as {@code traceId} in the logs, letting a client-facing
+   * error be correlated with the server-side trace.
+   */
+  private String currentTraceId() {
+    SpanContext spanContext = Span.current().getSpanContext();
+    return spanContext.isValid() ? spanContext.getTraceId() : null;
   }
 
 }
