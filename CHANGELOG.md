@@ -1,3 +1,9 @@
+## [1.0.0-rc.10](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.9...v1.0.0-rc.10) (2026-10-15)
+
+### Features
+
+* align setup with atlas-agate-backend (A1A-340) (#16) ([5934613](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/5934613ac867d2c8bbf8529e9e8220973d741d5d)), closes [A1A-340](https://blw-ofag-ufag.atlassian.net/browse/A1A-340)
+
 ## [1.0.0-rc.9](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.8...v1.0.0-rc.9) (2026-08-17)
 
 ### Bug Fixes
