@@ -247,7 +247,8 @@
                      value="Lambda parameter name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="CatchParameterName">
-            <property name="format" value="^[a-z]([a-z0-9][a-zA-Z0-9]*)?$"/>
+            <!-- '_' allows the Java unnamed variable for ignored exceptions -->
+            <property name="format" value="^(_|[a-z]([a-z0-9][a-zA-Z0-9]*)?)$"/>
             <message key="name.invalidPattern"
                      value="Catch parameter name ''{0}'' must match pattern ''{1}''."/>
         </module>
@@ -303,7 +304,7 @@
             <property name="caseIndent" value="2"/>
             <property name="throwsIndent" value="4"/>
             <property name="lineWrappingIndentation" value="4"/>
-            <property name="arrayInitIndent" value="2"/>
+            <property name="arrayInitIndent" value="4"/>
         </module>
 
         <module name="AbbreviationAsWordInName">
@@ -393,13 +394,6 @@
                                  or self::RECORD_DEF or self::ENUM_DEF]
                                  [not(./MODIFIERS/LITERAL_PUBLIC)]]"/>
         </module>
-<!--        <module name="MissingJavadocType">-->
-<!--            <property name="scope" value="protected"/>-->
-<!--            <property name="tokens"-->
-<!--                      value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF,-->
-<!--              RECORD_DEF, ANNOTATION_DEF"/>-->
-<!--            <property name="excludeScope" value="nothing"/>-->
-<!--        </module>-->
         <module name="MethodName">
             <property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9]*$"/>
             <message key="name.invalidPattern"
