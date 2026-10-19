@@ -1,3 +1,9 @@
+## [1.0.0-rc.11](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.10...v1.0.0-rc.11) (2026-10-19)
+
+### Bug Fixes
+
+* run CI on ubuntu-26.04 runners (#17) ([62c6e57](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/62c6e571d5ccf4f554b5a17bcaef62b12f89c6d9))
+
 ## [1.0.0-rc.10](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.9...v1.0.0-rc.10) (2026-10-15)
 
 ### Features
