@@ -16,7 +16,7 @@ on:
 jobs:
   # maps the branch to an environment and sets it as output for the rest of the workflow
   set-env:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     outputs:
       environment: ${{ steps.map-branch-to-env.outputs.environment }}
 
@@ -34,7 +34,7 @@ jobs:
   # resolves environment specific variables like repository and sets them as output for the rest of the workflow.
   # this is only needed if the variables are not used directly but instead passed as input to a subworkflow
   resolve-env-vars:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs: set-env
     environment: ${{ needs.set-env.outputs.environment }}
     outputs:
@@ -49,7 +49,7 @@ jobs:
 
   backend-workflow:
     name: "."
-    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/backend_workflow.yml@v1.1.2
+    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/backend_workflow.yml@v1.5.0
     needs: [ set-env, resolve-env-vars ]
     secrets:
       GH_ORG_GITLEAKS_PRIVATE_KEY: ${{ secrets.GH_ORG_GITLEAKS_PRIVATE_KEY }}
