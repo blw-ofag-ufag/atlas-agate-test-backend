@@ -28,10 +28,15 @@ quarkus:
       origins:
         - http://localhost:4200
   keycloak:
+    # The test-backend does not run its own local Keycloak — it uses the shared instance started by
+    # atlas-agate-local (or atlas-agate-backend's Dev Service) on the fixed port 9999. If ever enabled
+    # here, it must use the same custom ECR image (pinned) + realm-name agate + port 9999 (A1A-312).
     devservices:
       enabled: false
-#      port: 6999
-#      realm-path: agate_realm.json
+#      image-name: 681832766879.dkr.ecr.eu-central-2.amazonaws.com/keycloak:1.0.0-rc.9
+#      realm-name: agate
+#      port: 9999
+#      realm-path: agate-realm.json
   log:
     console:
       json:

@@ -49,7 +49,7 @@ jobs:
 
   backend-workflow:
     name: "."
-    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/backend_workflow.yml@v1.1.2
+    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/backend_workflow.yml@v1.7.0
     needs: [ set-env, resolve-env-vars ]
     secrets:
       GH_ORG_GITLEAKS_PRIVATE_KEY: ${{ secrets.GH_ORG_GITLEAKS_PRIVATE_KEY }}
@@ -71,3 +71,7 @@ jobs:
       infrastructure_repo: ${{ needs.resolve-env-vars.outputs.infrastructure_repo }}
       github-organization: 'blw-ofag-ufag'
       enable-owasp-check: false
+      # ADR-1005: pull role for the custom Keycloak Dev Services testcontainer (A1A-312). Assumed
+      # directly (no role chaining) so pull_request runs can pull the image. Non-secret ARN, set as
+      # the repo/org variable KEYCLOAK_ECR_PULL_ROLE_ARN (output keycloak_ecr_pull_role_arn in pc-core).
+      keycloak-ecr-pull-role-arn: ${{ vars.KEYCLOAK_ECR_PULL_ROLE_ARN }}

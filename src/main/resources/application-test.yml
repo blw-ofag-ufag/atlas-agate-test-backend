@@ -4,7 +4,11 @@ quarkus:
   console:
     color: true
   keycloak:
+    # Custom Keycloak image from ECR, version pinned (A1A-312, EK-005 MUST — no moving tag), so the test
+    # token carries the real custom mappers. realm-name must be set once the container image is shared.
     devservices:
+      image-name: 681832766879.dkr.ecr.eu-central-2.amazonaws.com/keycloak:1.0.0-rc.9
+      realm-name: agate
       realm-path: agate-realm.json
       start-timeout: 300s
   #  cxf:
