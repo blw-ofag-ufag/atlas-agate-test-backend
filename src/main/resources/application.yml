@@ -92,6 +92,13 @@ quarkus:
       http-server:
         enabled: true
 
+  keycloak:
+    # Keycloak Dev Service of the profiles local and test (Dev Services never run in prod): the image
+    # delivered by atlas-agate-keycloak-customization, so its custom mappers shape the token as on dev.
+    # Same pin as atlas-agate-backend; bump together with the realm export.
+    devservices:
+      image-name: 681832766879.dkr.ecr.eu-central-2.amazonaws.com/keycloak:1.0.0-rc.9
+      realm-name: agate
   log:
     category:
       "ch.blw.agate.common.filters":
