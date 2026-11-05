@@ -22,6 +22,11 @@ quarkus:
     category:
       ch.blw.agate.common.filters:
         level: WARN
+      # Testcontainers: logs the image each container starts from, so CI shows which Keycloak ran.
+      tc:
+        level: INFO
+      io.quarkus.devservices.keycloak:
+        level: DEBUG
 #  oidc-client:
 #    agis-api:
 #      token-path: http://localhost:8051/agate/token
