@@ -50,7 +50,8 @@ jobs:
 
   backend-workflow:
     name: "."
-    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/backend_workflow.yml@v1.5.0
+    # TEMP: feature branch until atlas-code-github-workflows v1.8.0 is released; then pin @v1.8.0.
+    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/backend_workflow.yml@story/A1A-312-ecr-pull-role-input
     needs: [ set-env, resolve-env-vars ]
     secrets:
       GH_ORG_GITLEAKS_PRIVATE_KEY: ${{ secrets.GH_ORG_GITLEAKS_PRIVATE_KEY }}
@@ -72,3 +73,6 @@ jobs:
       infrastructure_repo: ${{ needs.resolve-env-vars.outputs.infrastructure_repo }}
       github-organization: 'blw-ofag-ufag'
       enable-owasp-check: false
+      # Pull role for the Keycloak Dev Service image. Not a secret and not per environment, so the
+      # unit tests can pull on pull requests too: documented exception to EK-003, see ADR-1005.
+      ecr-pull-role-arn: "arn:aws:iam::681832766879:role/agate-ecr-pull-role"
