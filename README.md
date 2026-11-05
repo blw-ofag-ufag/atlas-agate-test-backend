@@ -16,8 +16,28 @@ Agate OIDC integration.
 ### 🔐 Keycloak
 
 The `local` profile starts the **Keycloak Dev Service**, which serves `src/test/resources/agate-realm.json` (same realm as
-`atlas-agate-backend`) on port 6999. No docker-compose setup is needed. The container is shared, so a locally running
-`atlas-agate-backend` reuses it.
+`atlas-agate-backend`) on port 9999. No docker-compose setup is needed. The container is shared with
+`atlas-agate-backend`: whichever backend starts first creates it, the other reuses it — so only one Keycloak may run on 9999.
+
+The Dev Service (profiles `local` and `test`) runs the **delivered Agate Keycloak image** from ECR, pinned in
+`application.yml` (`quarkus.keycloak.devservices.image-name`, same pin as `atlas-agate-backend`), with
+`realm-name: agate`. Its custom mappers are active, so tokens look like on dev.
+
+**Registry access (once per session).** The image lives in the private ECR of the Agate dev account, so log in before
+the first `quarkus:dev` or `./mvnw verify`:
+
+```shell
+aws sso login --profile <profile-of-the-agate-dev-account>   # account 681832766879
+aws ecr get-login-password --region eu-central-2 --profile <profile-of-the-agate-dev-account> \
+  | docker login --username AWS --password-stdin 681832766879.dkr.ecr.eu-central-2.amazonaws.com
+```
+
+CI pulls the image through its own pull role (`agate-ecr-pull-role`, see ADR-1005) — nothing to do there.
+
+**Realm.** `src/test/resources/agate-realm.json` is a manual export from
+[atlas-agate-local](https://github.com/blw-ofag-ufag/atlas-agate-local) (`scripts/regenerate-realm-export.sh`, including
+its marked `local-test-additions.json`), copied byte-identical into both backends — never edit it here. It is temporary:
+the versioned realm artifact replaces it (A1A-602). Bump the image pin together with the export.
 
 Tokens from the embedded Keycloak are accepted because `quarkus.oidc.resolve-tenants-with-issuer` maps them onto the
 tenant the Dev Service configures. Request the `openid` scope — the app has `user-info-required` enabled, and Keycloak
