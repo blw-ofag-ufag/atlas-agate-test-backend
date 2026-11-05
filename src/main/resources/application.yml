@@ -99,9 +99,9 @@ quarkus:
     devservices:
       image-name: 681832766879.dkr.ecr.eu-central-2.amazonaws.com/keycloak:1.0.0-rc.9
       realm-name: agate
-      # Realm creation is one admin POST of the whole export; the default 4S times out on CI runners
-      # while Keycloak keeps importing, so the tests would race a half-created realm.
-      web-client-timeout: 30S
+      # Realm creation is one admin POST of the whole export and takes about 4s on CI runners; the
+      # default 4S timed out while Keycloak kept importing, so the tests raced a half-created realm.
+      web-client-timeout: 10S
   log:
     category:
       "ch.blw.agate.common.filters":
