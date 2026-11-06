@@ -64,13 +64,9 @@ Traces are not exported yet (`quarkus.otel.traces.exporter=none`).
 
 ## 🧪 Tests
 
-`@QuarkusTest` spins up a Keycloak container configured similarly to the real Agate realm, but without brokering authentication to eIAM. Tests can also be driven via Swagger UI or
-the `.http` test files.
-
-> **Heads-up when refreshing `src/test/resources/agate-realm.json` from `atlas-agate-local`:**
-> set `"directAccessGrantsEnabled" : true` on the `agridata` client. The Quarkus integration
-> tests use the OAuth password grant to obtain tokens; without this flag Keycloak rejects
-> the request with an HTML error page.
+`@QuarkusTest` spins up the delivered Keycloak image (see [Keycloak](#-keycloak); ECR login required)
+with the Agate realm export, without brokering authentication to eIAM. Tests can also be driven via
+Swagger UI or the `.http` test files.
 
 ---
 
