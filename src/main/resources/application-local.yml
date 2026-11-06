@@ -40,7 +40,7 @@ quarkus:
       realm-name: agate
       port: 9999
       realm-path: src/test/resources/agate-realm.json
-      # The default 4S is too short for the realm import on CI.
+      # The default 4S is too short for the realm import on a cold container start.
       web-client-timeout: 10S
   log:
     json:
