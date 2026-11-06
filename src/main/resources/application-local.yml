@@ -32,14 +32,16 @@ quarkus:
       origins:
         - http://localhost:4200
   keycloak:
-    # Embedded Keycloak with the Agate realm on a fixed port (replaces the docker-compose setup from
-    # atlas-agate-local). realm-path is resolved on the classpath first, then on the file system — the
-    # file lives under src/test/resources, hence the relative path (works when dev mode runs from the
-    # module root). The container is shared, so atlas-agate-backend started locally reuses it.
+    # Shared with atlas-agate-backend on port 9999. Keep image-name and realm-name in sync with
+    # application-test.yml. realm-path is relative to the module root (dev mode runs from there).
     devservices:
       enabled: true
-      port: 6999
+      image-name: 681832766879.dkr.ecr.eu-central-2.amazonaws.com/keycloak:1.0.0-rc.9
+      realm-name: agate
+      port: 9999
       realm-path: src/test/resources/agate-realm.json
+      # The default 4S is too short for the realm import on a cold container start.
+      web-client-timeout: 10S
   log:
     json:
       console:
@@ -65,7 +67,7 @@ quarkus:
   oidc:
     resolve-tenants-with-issuer: true
     agate-local:
-      auth-server-url: http://localhost:6999/realms/agate
+      auth-server-url: http://localhost:9999/realms/agate
       application-type: service
       authentication:
         user-info-required: true
@@ -84,7 +86,7 @@ quarkus:
   # agate.Agate_Api_Identitas role required by the SOAP endpoint), so run atlas-agate-backend locally
   # alongside or point SOAP_ENDPOINT_URL elsewhere.
   oidc-client:
-    auth-server-url: http://localhost:6999/realms/agate
+    auth-server-url: http://localhost:9999/realms/agate
     client-id: tvd-agate-api
     credentials:
       secret: secret
@@ -97,7 +99,7 @@ quarkus:
   #      body-limit: 10240
   #      scope: request-response
   smallrye-openapi:
-    oidc-open-id-connect-url: http://localhost:6999/realms/agate/.well-known/openid-configuration
+    oidc-open-id-connect-url: http://localhost:9999/realms/agate/.well-known/openid-configuration
   swagger-ui:
     oauth-client-id: agate
   observability:
