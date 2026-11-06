@@ -35,7 +35,7 @@ aws ecr get-login-password --region eu-central-2 --profile <profile-of-the-agate
   | docker login --username AWS --password-stdin 681832766879.dkr.ecr.eu-central-2.amazonaws.com
 ```
 
-CI pulls the image through its own pull role (`agate-ecr-pull-role`, see ADR-1005) — nothing to do there.
+CI pulls the image through its own pull role (`agate-ecr-pull-role`) — nothing to do there.
 
 **Realm.** `src/test/resources/agate-realm.json` is a manual export from
 [atlas-agate-local](https://github.com/blw-ofag-ufag/atlas-agate-local) (`scripts/regenerate-realm-export.sh`, including

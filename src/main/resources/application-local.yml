@@ -32,19 +32,15 @@ quarkus:
       origins:
         - http://localhost:4200
   keycloak:
-    # Embedded Keycloak on port 9999 (replaces the docker-compose setup from atlas-agate-local), shared
-    # with atlas-agate-backend: the backend started second reuses the running container. It runs the
-    # image delivered by atlas-agate-keycloak-customization, so its custom mappers shape the token as on
-    # dev; image and realm-name must match application-test.yml and atlas-agate-backend. Bump the image
-    # together with the realm export. realm-path is resolved on the classpath first, then on the file
-    # system; the file lives under src/test/resources, so the path is relative to the module root.
+    # Shared with atlas-agate-backend on port 9999. Keep image-name and realm-name in sync with
+    # application-test.yml. realm-path is relative to the module root (dev mode runs from there).
     devservices:
       enabled: true
       image-name: 681832766879.dkr.ecr.eu-central-2.amazonaws.com/keycloak:1.0.0-rc.9
       realm-name: agate
       port: 9999
       realm-path: src/test/resources/agate-realm.json
-      # The default 4S is too short for the realm import (measured ~4s on CI).
+      # The default 4S is too short for the realm import on CI.
       web-client-timeout: 10S
   log:
     json:

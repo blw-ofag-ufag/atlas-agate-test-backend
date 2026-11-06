@@ -4,13 +4,13 @@ quarkus:
   console:
     color: true
   keycloak:
-    # Same image and realm-name as application-local.yml (delivered image, custom mappers as on dev).
+    # Keep image-name and realm-name in sync with application-local.yml.
     devservices:
       image-name: 681832766879.dkr.ecr.eu-central-2.amazonaws.com/keycloak:1.0.0-rc.9
       realm-name: agate
       realm-path: agate-realm.json
       start-timeout: 300s
-      # The default 4S is too short for the realm import (measured ~4s on CI).
+      # The default 4S is too short for the realm import on CI.
       web-client-timeout: 10S
   #  cxf:
   #    client:
@@ -27,7 +27,7 @@ quarkus:
     category:
       ch.blw.agate.common.filters:
         level: WARN
-      # Testcontainers: logs the image each container starts from, so CI shows which Keycloak ran.
+      # Testcontainers: logs the image of every started container.
       tc:
         level: INFO
 #  oidc-client:
