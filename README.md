@@ -20,8 +20,11 @@ The `local` profile starts the **Keycloak Dev Service**, which serves `src/test/
 `atlas-agate-backend`: whichever backend starts first creates it, the other reuses it — so only one Keycloak may run on 9999.
 
 The Dev Service (profiles `local` and `test`) runs the **delivered Agate Keycloak image** from ECR, pinned in
-`application.yml` (`quarkus.keycloak.devservices.image-name`, same pin as `atlas-agate-backend`), with
-`realm-name: agate`. Its custom mappers are active, so tokens look like on dev.
+`application-local.yml` and `application-test.yml` (`quarkus.keycloak.devservices.image-name`, same pin as
+`atlas-agate-backend`), with `realm-name: agate`. Its custom mappers are active, so tokens look like on dev.
+
+The Keycloak of atlas-agate-local binds 9999 too and is not reused. Stop it (`docker compose stop keycloak` there)
+before `quarkus:dev`, or run against it instead of the Dev Service: `-Dquarkus.keycloak.devservices.enabled=false`.
 
 **Registry access (once per session).** The image lives in the private ECR of the Agate dev account, so log in before
 the first `quarkus:dev` or `./mvnw verify`:
@@ -37,7 +40,7 @@ CI pulls the image through its own pull role (`agate-ecr-pull-role`, see ADR-100
 **Realm.** `src/test/resources/agate-realm.json` is a manual export from
 [atlas-agate-local](https://github.com/blw-ofag-ufag/atlas-agate-local) (`scripts/regenerate-realm-export.sh`, including
 its marked `local-test-additions.json`), copied byte-identical into both backends — never edit it here. It is temporary:
-the versioned realm artifact replaces it (A1A-602). Bump the image pin together with the export.
+the versioned realm artifact replaces it (A1A-602). Bump the image pin (both profile files) together with the export.
 
 Tokens from the embedded Keycloak are accepted because `quarkus.oidc.resolve-tenants-with-issuer` maps them onto the
 tenant the Dev Service configures. Request the `openid` scope — the app has `user-info-required` enabled, and Keycloak

@@ -4,9 +4,14 @@ quarkus:
   console:
     color: true
   keycloak:
+    # Same image and realm-name as application-local.yml (delivered image, custom mappers as on dev).
     devservices:
+      image-name: 681832766879.dkr.ecr.eu-central-2.amazonaws.com/keycloak:1.0.0-rc.9
+      realm-name: agate
       realm-path: agate-realm.json
       start-timeout: 300s
+      # The default 4S is too short for the realm import (measured ~4s on CI).
+      web-client-timeout: 10S
   #  cxf:
   #    client:
   #      uid:
