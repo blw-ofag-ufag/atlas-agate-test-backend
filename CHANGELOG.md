@@ -1,3 +1,9 @@
+## [1.0.0-rc.12](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.11...v1.0.0-rc.12) (2026-11-09)
+
+### Features
+
+* **keycloak:** Dev Service on the delivered ECR image, realm agate, port 9999 (A1A-312) (#29) ([3dfa986](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/3dfa986f5e9c3f61336374bf8d8e29efa864b64d)), closes [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312)
+
 ## [1.0.0-rc.11](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.10...v1.0.0-rc.11) (2026-10-19)
 
 ### Bug Fixes
