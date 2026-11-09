@@ -50,8 +50,7 @@ jobs:
 
   backend-workflow:
     name: "."
-    # TEMP: pin @v1.8.0 once released.
-    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/backend_workflow.yml@story/A1A-312-ecr-pull-role-input
+    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/backend_workflow.yml@v1.8.0
     needs: [ set-env, resolve-env-vars ]
     secrets:
       GH_ORG_GITLEAKS_PRIVATE_KEY: ${{ secrets.GH_ORG_GITLEAKS_PRIVATE_KEY }}
