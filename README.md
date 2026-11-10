@@ -26,12 +26,44 @@ The Dev Service (profiles `local` and `test`) runs the **delivered Agate Keycloa
 The Keycloak of atlas-agate-local binds 9999 too and is not reused. Stop it (`docker compose stop keycloak` there)
 before `quarkus:dev`, or run against it instead of the Dev Service: `-Dquarkus.keycloak.devservices.enabled=false`.
 
-**Registry access (once per session).** The image lives in the private ECR of the Agate dev account, so log in before
-the first `quarkus:dev` or `./mvnw verify`:
+**Registry access.** The image lives in the private ECR of the Agate dev account (681832766879). Let the
+[ECR credential helper](https://github.com/awslabs/amazon-ecr-credential-helper) fetch the token through your AWS profile
+whenever Docker or Testcontainers pulls — no `docker login`:
+
+1. Docker Desktop for macOS ships `docker-credential-ecr-login`; elsewhere download it from the releases of that
+   repository and put it on your `PATH`. Check with `docker-credential-ecr-login version`.
+2. Route the registry to it in `~/.docker/config.json` (Windows: `%USERPROFILE%\.docker\config.json`), keeping the
+   existing content:
+
+   ```json
+   "credHelpers": {
+     "681832766879.dkr.ecr.eu-central-2.amazonaws.com": "ecr-login"
+   }
+   ```
+
+   Remove a token from an earlier login: `docker logout 681832766879.dkr.ecr.eu-central-2.amazonaws.com`.
+3. Make the dev account your default profile — the helper takes it from `AWS_PROFILE`, also when Testcontainers calls
+   it from the JVM. `atlas-dev` is the profile set up in
+   [pc-core-blw-agate-dev](https://github.com/blw-ofag-ufag/pc-core-blw-agate-dev); use yours if it differs.
+
+   ```shell
+   echo 'export AWS_PROFILE=atlas-dev' >> ~/.zshrc   # Windows: setx AWS_PROFILE atlas-dev
+   ```
+
+   Open a new terminal afterwards (and restart your IDE if you start the app from there). Other accounts (int, prod,
+   bbs …) always with an explicit `--profile`, which overrides the default.
+4. When the SSO session has expired (every 12 h): `aws sso login`.
+
+`no basic auth credentials` means `AWS_PROFILE` is missing in that process or the SSO session has expired — a token
+cached in `~/.ecr/cache.json` does not help without the profile. Details are in `~/.ecr/log/ecr-login.log`.
+
+**Alternative without the helper: `docker login` per session.** The previous way still works — skip steps 1–3 and log
+Docker in yourself once per session (the token lasts 12 h). On Windows the Credential Manager may reject this token as
+too long; use the helper there.
 
 ```shell
-aws sso login --profile <profile-of-the-agate-dev-account>   # account 681832766879
-aws ecr get-login-password --region eu-central-2 --profile <profile-of-the-agate-dev-account> \
+aws sso login --profile atlas-dev
+aws ecr get-login-password --region eu-central-2 --profile atlas-dev \
   | docker login --username AWS --password-stdin 681832766879.dkr.ecr.eu-central-2.amazonaws.com
 ```
 
