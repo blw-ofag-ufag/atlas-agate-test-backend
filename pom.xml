@@ -14,21 +14,21 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>3.40.1</quarkus.platform.version>
+        <quarkus.platform.version>3.40.1.1</quarkus.platform.version>
         <quarkus-cxf.version>3.40.3</quarkus-cxf.version>
         <dependency-check-maven.version>13.0.0</dependency-check-maven.version>
         <lombok.version>1.18.48</lombok.version>
         <mapstruct.version>1.6.3</mapstruct.version> <!-- or latest -->
         <assertj.version>3.27.7</assertj.version>
 
-        <surefire-plugin.version>3.6.0</surefire-plugin.version>
+        <surefire-plugin.version>3.6.1</surefire-plugin.version>
         <sonar-maven-plugin.version>5.8.0.7211</sonar-maven-plugin.version>
         <sonar.organization>bundesamt-fur-landwirtschaft-blw</sonar.organization>
         <sonar.projectKey>blw-ofag-ufag_atlas-agate-test-backend</sonar.projectKey>
-        <checkstyle.version>14.3.0</checkstyle.version>
+        <checkstyle.version>14.4.0</checkstyle.version>
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
-        <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
-        <quarkus-loggingjson.version>3.5.0</quarkus-loggingjson.version>
+        <jacoco-maven-plugin.version>0.8.16</jacoco-maven-plugin.version>
+        <quarkus-loggingjson.version>3.6.0</quarkus-loggingjson.version>
 
         <sonar.exclusions>**/generated/**</sonar.exclusions>
         <sonar.coverage.exclusions>**/generated/**</sonar.coverage.exclusions>
