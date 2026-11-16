@@ -36,7 +36,7 @@ quarkus:
     # application-test.yml. realm-path is relative to the module root (dev mode runs from there).
     devservices:
       enabled: true
-      image-name: 681832766879.dkr.ecr.eu-central-2.amazonaws.com/keycloak:1.0.0-rc.9
+      image-name: 681832766879.dkr.ecr.eu-central-2.amazonaws.com/keycloak:1.0.0-rc.10
       realm-name: agate
       port: 9999
       realm-path: src/test/resources/agate-realm.json
