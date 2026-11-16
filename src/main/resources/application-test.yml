@@ -6,7 +6,7 @@ quarkus:
   keycloak:
     # Keep image-name and realm-name in sync with application-local.yml.
     devservices:
-      image-name: 681832766879.dkr.ecr.eu-central-2.amazonaws.com/keycloak:1.0.0-rc.9
+      image-name: 681832766879.dkr.ecr.eu-central-2.amazonaws.com/keycloak:1.0.0-rc.10
       realm-name: agate
       realm-path: agate-realm.json
       start-timeout: 300s
