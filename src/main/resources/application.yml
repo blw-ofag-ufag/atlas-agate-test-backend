@@ -36,7 +36,21 @@ quarkus:
   http:
     root-path: /test-backend
     auth:
+      policy:
+        # Inclusion of agate-playwright-test-role (A1A-308)
+        playwright-test-role:
+          roles-allowed:
+            - agate-playwright-test-role
       permission:
+        tvd-user-protected:
+          paths: api/tvd/*
+          methods: GET,POST,PUT,DELETE,PATCH
+          policy: playwright-test-role
+        tvd-user-options:
+          paths: api/tvd/*
+          methods: OPTIONS
+          policy: permit
+          auth-mechanism: none
         api-protected:
           paths: api/*
           policy: authenticated
