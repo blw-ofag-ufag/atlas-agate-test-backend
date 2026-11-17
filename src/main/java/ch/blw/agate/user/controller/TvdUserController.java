@@ -2,8 +2,8 @@ package ch.blw.agate.user.controller;
 
 import ch.blw.agate.user.dto.TvdUserDto;
 import ch.blw.agate.user.soap.AgateUserQueryService;
+import io.quarkus.security.Authenticated;
 import io.smallrye.common.annotation.RunOnVirtualThread;
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -18,7 +18,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 @Tag(name = "TVD Users", description = "Queries user data from the Agate SOAP API")
 @RunOnVirtualThread
 @RequiredArgsConstructor
-@RolesAllowed("agate-playwright-test-role")
+@Authenticated
 public class TvdUserController {
 
   public static final String PATH = "/api/tvd";
