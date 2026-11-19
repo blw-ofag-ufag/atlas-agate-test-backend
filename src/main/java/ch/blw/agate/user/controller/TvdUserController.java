@@ -21,7 +21,6 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 @RolesAllowed(TvdUserController.TESTSUPPORT_ROLE)
 public class TvdUserController {
 
-  /** Held by the Playwright client {@code agate-playwright}; the path policy {@code api-protected} only requires a login. */
   public static final String TESTSUPPORT_ROLE = "agate.Agate_Testsupport";
 
   public static final String PATH = "/api/tvd";
