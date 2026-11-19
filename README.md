@@ -69,10 +69,11 @@ aws ecr get-login-password --region eu-central-2 --profile atlas-dev \
 
 CI pulls the image through its own pull role (`agate-ecr-pull-role`) — nothing to do there.
 
-**Realm.** `src/test/resources/agate-realm.json` is the realm export attached to a release of
-[atlas-agate-keycloak-config](https://github.com/blw-ofag-ufag/atlas-agate-keycloak-config)
-(`agate-realm_<version>_keycloak-<image tag>.json`), copied byte-identical into both backends — never edit it here; roles
-and clients are added in that module. It is temporary: the versioned realm artifact replaces it (A1A-602).
+**Realm.** `src/test/resources/agate-realm.json` is an export of `examples/local` of
+[atlas-agate-keycloak-config](https://github.com/blw-ofag-ufag/atlas-agate-keycloak-config), with the client
+secrets Keycloak generates itself scrubbed to `local-dummy-secret`, copied byte-identical into both backends — never
+edit it here; roles and clients are added in that module. It is temporary: the versioned realm artifact replaces it
+(A1A-602).
 Bump the image pin (both profile files) together with the export.
 
 Tokens from the embedded Keycloak are accepted because `quarkus.oidc.resolve-tenants-with-issuer` maps them onto the
