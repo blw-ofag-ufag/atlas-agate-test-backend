@@ -1,3 +1,9 @@
+## [1.0.0-rc.13](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.12...v1.0.0-rc.13) (2026-11-19)
+
+### Features
+
+* **user:** require agate.Agate_Testsupport for the TVD user endpoints (A1A-308) (#35) ([fa5980b](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/fa5980b0540325c0cb2a153740b311d94b90f669)), closes [A1A-308](https://blw-ofag-ufag.atlassian.net/browse/A1A-308) [A1A-308](https://blw-ofag-ufag.atlassian.net/browse/A1A-308) [A1A-308](https://blw-ofag-ufag.atlassian.net/browse/A1A-308) [A1A-308](https://blw-ofag-ufag.atlassian.net/browse/A1A-308) [A1A-308](https://blw-ofag-ufag.atlassian.net/browse/A1A-308)
+
 ## [1.0.0-rc.12](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.11...v1.0.0-rc.12) (2026-11-09)
 
 ### Features
