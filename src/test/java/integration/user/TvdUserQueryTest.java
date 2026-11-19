@@ -21,16 +21,23 @@ class TvdUserQueryTest {
   AgateUserQueryService agateUserQueryService;
 
   @Test
-  void givenAuthUser_whenQueryUsers_thenReturnsMappedDtos() {
+  void givenPlaywrightClient_whenQueryUsers_thenReturnsMappedDtos() {
     when(agateUserQueryService.queryUsers()).thenReturn(List.of(
         new TvdUserDto("3365033", "Ramon", "Rüfenacht", "184723", "Default"),
         new TvdUserDto("9811215", "David", "Oberli", "184724", "Default")));
 
-    AuthTestUtils.requestAs(EINWILLIGER_ERIKA)
+    AuthTestUtils.requestAsPlaywrightClient()
         .when().get(TvdUserController.PATH + "/users")
         .then().statusCode(200)
         .body("loginId", hasItems("3365033", "9811215"))
         .body("name", hasItems("Rüfenacht", "Oberli"));
+  }
+
+  @Test
+  void givenAuthUserWithoutTestsupportRole_whenQueryUsers_thenForbidden() {
+    AuthTestUtils.requestAs(EINWILLIGER_ERIKA)
+        .when().get(TvdUserController.PATH + "/users")
+        .then().statusCode(403);
   }
 
   @Test
@@ -41,11 +48,11 @@ class TvdUserQueryTest {
   }
 
   @Test
-  void givenAuthUser_whenGetUsersByLoginId_thenReturnsMappedDtos() {
+  void givenPlaywrightClient_whenGetUsersByLoginId_thenReturnsMappedDtos() {
     when(agateUserQueryService.getUsersByLoginId(List.of("3365033"))).thenReturn(List.of(
         new TvdUserDto("3365033", "Ramon", "Rüfenacht", "184723", "Default")));
 
-    AuthTestUtils.requestAs(EINWILLIGER_ERIKA)
+    AuthTestUtils.requestAsPlaywrightClient()
         .queryParam("loginId", "3365033")
         .when().get(TvdUserController.PATH + "/users/by-login-id")
         .then().statusCode(200)
