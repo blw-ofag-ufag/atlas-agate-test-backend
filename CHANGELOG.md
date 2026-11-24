@@ -1,3 +1,9 @@
+## [1.0.0-rc.14](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.13...v1.0.0-rc.14) (2026-11-24)
+
+### Features
+
+* **auth:** integrates auth A1-41 ([02ac5eb](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/02ac5eb0b6321f844db1a30dfe17603540a7a8f1)), closes [A1-41](https://blw-ofag-ufag.atlassian.net/browse/A1-41) [A1-41](https://blw-ofag-ufag.atlassian.net/browse/A1-41)
+
 ## [1.0.0-rc.13](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.12...v1.0.0-rc.13) (2026-11-19)
 
 ### Features
