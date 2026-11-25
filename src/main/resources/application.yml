@@ -6,16 +6,20 @@ quarkus:
     name: "Agate test backend"
   banner:
     path: banner.txt
-  #  cxf:
-  #    client:
-  #      uid:
-  #        client-endpoint-url: https://www.uid-wse-a.admin.ch/V5.0/PublicServices.svc
-  #        service-interface: ch.admin.uid.xmlns.uid_wse.IPublicServices
-  #        wsdl: classpath:wsdl/uid-register.wsdl
-  #    codegen:
-  #      wsdl2java:
-  #        uid:
-  #          includes: wsdl/uid-register.wsdl
+  cxf:
+    codegen:
+      wsdl2java:
+        nevis:
+          includes: wsdl/nevis_api.wsdl
+          package-names: ch.blw.agate.user.soap.generated
+          additional-params:
+            - -b
+            - src/main/resources/wsdl/bindings.xjb
+    client:
+      adminService:
+        client-endpoint-url: ${SOAP_ENDPOINT_URL:https://backend.blw-agate-dev.pc-core.isceco.admin.ch/backend/soap/AdminService/v1_44}
+        service-interface: ch.blw.agate.user.soap.generated.AdminService
+        out-interceptors: "#bearerTokenInterceptor"
   #  datasource:
   #    db-kind: postgresql
   #    jdbc:
@@ -36,17 +40,26 @@ quarkus:
         api-protected:
           paths: api/*
           policy: authenticated
+          methods: GET,POST,PUT,DELETE,PATCH
+        api-options:
+          paths: api/*
+          methods: OPTIONS
+          policy: permit
+          auth-mechanism: none
         unprotected:
           paths: q/*
           policy: permit
           auth-mechanism: none
+    header:
+      cache-control:
+        value: no-cache
     cors:
       access-control-allow-credentials: true
       enabled: true
       headers:
         - Authorization
         - Content-Type
-        - X-Impersonated-AgateLoginId
+        - X-Requested-With
       methods:
         - GET
         - PUT
@@ -55,6 +68,22 @@ quarkus:
         - OPTIONS
         - PATCH
     port: 8900
+  otel:
+    # Traces provide the traceId/spanId used for request correlation in the logs. Metrics stay on
+    # micrometer, so only enable the OpenTelemetry tracing signal here.
+    metrics:
+      enabled: false
+    logs:
+      enabled: false
+    traces:
+      # No OTLP collector is wired up yet. "none" keeps spans created in-process (so traceId/spanId
+      # are populated in the MDC) without shipping them anywhere. Set this to "otlp" and configure
+      # quarkus.otel.exporter.otlp.endpoint per environment to actually export traces.
+      exporter: none
+  observability:
+    # quarkus-opentelemetry pulls in the Grafana LGTM Dev Service in dev mode, which starts a container
+    # and redirects the OTel exporter to it. Not needed while traces are only used for log correlation.
+    enabled: false
   micrometer:
     enabled: true
     binder:
@@ -67,12 +96,21 @@ quarkus:
     category:
       "ch.blw.agate.common.filters":
         min-level: TRACE
+      # No OTLP collector is configured (quarkus.otel.traces.exporter=none), so this factory logs a
+      # WARN per span it cannot submit ("VertxTracer delegate not set"). Silence that known noise
+      # until a collector is wired up; see https://github.com/quarkusio/quarkus/issues/37718
+      "io.quarkus.opentelemetry.runtime.tracing.instrumentation.vertx.OpenTelemetryVertxTracingFactory$VertxDelegator":
+        level: ERROR
     console:
-      json:
-        enabled: true
-        pretty-print: false
       format: >-
-        %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %s [%c] (%t) requestId: %X{requestId}, userId: %X{userId},  api: %X{api}%e%n
+        %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %s [%c] (%t) traceId: %X{traceId}, spanId: %X{spanId}, userId: %X{userId},  api: %X{api}%e%n
+    # quarkus-logging-json (Quarkiverse): renders the console output as JSON and maps kv(...)
+    # structured arguments onto top-level fields. Disabled in the local profile so the
+    # quarkus.log.console.format above is what you actually read during development.
+    json:
+      console:
+        enabled: true
+      pretty-print: false
   oidc:
     authentication:
       pkce-required: true
@@ -100,9 +138,23 @@ quarkus:
     oauth-scopes: openid offline_access
     oauth-use-pkce-with-authorization-code-grant: true
     enabled: true
-mp:
-  openapi:
-    scan:
-      exclude:
-        packages:
-          - org.openapitools.api # excludes the automatically generated apis (e.g. AGIS) from the openapi documents
+"%production":
+  quarkus:
+    oidc-client:
+      auth-server-url: ${OIDC_CLIENT_AUTH_SERVER_URL:https://backend.blw-agate-dev.pc-core.isceco.admin.ch:8443/idp/realms/agate}
+      client-id: agate-test-backend
+      scopes:
+        - openid
+      discovery-enabled: false
+      token-path: /protocol/openid-connect/token
+      jwks-path: /protocol/openid-connect/certs
+      grant:
+        type: client
+      tls:
+        tls-configuration-name: agate-mtls
+    tls:
+      agate-mtls:
+        key-store:
+          p12:
+            path: ${MTLS_CLIENT_KEYSTORE_PATH:/deployments/certs/agate-client.p12}
+            password: ${MTLS_CLIENT_KEYSTORE_PASSWORD}

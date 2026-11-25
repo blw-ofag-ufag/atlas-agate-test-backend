@@ -21,7 +21,7 @@ import org.eclipse.microprofile.jwt.JsonWebToken;
 @Slf4j
 public class AuthenticationService {
 
-  public static final String AGATE_AGRIDATA_PRODUCER_ROLE = "agate.Agridata_Einwilliger";
+  public static final String AGATE_AGRIDATA_PRODUCER_ROLE = "agridata.ch.Agridata_Einwilliger";
   public static final String AGATE_BENUTZER_ROLE = "agate.AgateBenutzer";
 
   public static final String ACCESS_TOKEN_CLAIM_AGATE_LOGIN_ID = "loginid";

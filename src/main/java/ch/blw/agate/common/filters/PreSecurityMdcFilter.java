@@ -6,23 +6,26 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.impl.jose.JWT;
 import io.vertx.ext.web.RoutingContext;
 import java.util.Optional;
-import java.util.UUID;
 import org.jboss.logging.MDC;
 
 /**
- * Adds request identifiers, user sub, and API paths to the logging context before security checks.
- * It improves traceability for early request stages.
+ * Adds user sub and API paths to the logging context before security checks. It improves
+ * traceability for early request stages, e.g. to analyze login failures that are rejected before
+ * any endpoint is reached. The actual request/response logging is done by {@link
+ * PreSecurityLogFilter}.
+ *
+ * <p>Request correlation is provided by OpenTelemetry: the {@code traceId} and {@code spanId} are
+ * put into the MDC automatically by the {@code quarkus-opentelemetry} extension, which also
+ * continues an inbound W3C {@code traceparent} header or starts a new trace when none is present.
  */
 public class PreSecurityMdcFilter {
 
-  public static final String REQUEST_ID_MDC_FIELD = "requestId";
   public static final String API_MDC_FIELD = "api";
   private static final String USER_ID_MDC_FIELD = "userId";
 
   // Higher numbers = higher priority (runs earlier)
   @RouteFilter(1501)
   void beforeSecurity(RoutingContext ctx) {
-    MDC.put(REQUEST_ID_MDC_FIELD, UUID.randomUUID().toString());
     MDC.put(USER_ID_MDC_FIELD, getUserId(ctx));
     String path = ctx.request().path();
     MDC.put(API_MDC_FIELD, path);

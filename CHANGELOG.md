@@ -1,3 +1,98 @@
+## [1.0.0-rc.16](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.15...v1.0.0-rc.16) (2026-11-25)
+
+### Bug Fixes
+
+* **deps:** update blw-ofag-ufag/atlas-code-github-workflows action to v1.9.0 ([705a45e](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/705a45ee359b87beb66086c9dcec7e8a644a1ab1))
+
+## [1.0.0-rc.15](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.14...v1.0.0-rc.15) (2026-11-25)
+
+### Bug Fixes
+
+* **deps:** update group-update [security] ([c14f50d](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/c14f50d2982cf5d568bccb8c074c5bfaa315bb96))
+
+## [1.0.0-rc.14](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.13...v1.0.0-rc.14) (2026-11-24)
+
+### Features
+
+* **auth:** integrates auth A1-41 ([02ac5eb](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/02ac5eb0b6321f844db1a30dfe17603540a7a8f1)), closes [A1-41](https://blw-ofag-ufag.atlassian.net/browse/A1-41) [A1-41](https://blw-ofag-ufag.atlassian.net/browse/A1-41)
+
+## [1.0.0-rc.13](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.12...v1.0.0-rc.13) (2026-11-19)
+
+### Features
+
+* **user:** require agate.Agate_Testsupport for the TVD user endpoints (A1A-308) (#35) ([fa5980b](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/fa5980b0540325c0cb2a153740b311d94b90f669)), closes [A1A-308](https://blw-ofag-ufag.atlassian.net/browse/A1A-308) [A1A-308](https://blw-ofag-ufag.atlassian.net/browse/A1A-308) [A1A-308](https://blw-ofag-ufag.atlassian.net/browse/A1A-308) [A1A-308](https://blw-ofag-ufag.atlassian.net/browse/A1A-308) [A1A-308](https://blw-ofag-ufag.atlassian.net/browse/A1A-308)
+
+## [1.0.0-rc.12](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.11...v1.0.0-rc.12) (2026-11-09)
+
+### Features
+
+* **keycloak:** Dev Service on the delivered ECR image, realm agate, port 9999 (A1A-312) (#29) ([3dfa986](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/3dfa986f5e9c3f61336374bf8d8e29efa864b64d)), closes [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312) [A1A-312](https://blw-ofag-ufag.atlassian.net/browse/A1A-312)
+
+## [1.0.0-rc.11](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.10...v1.0.0-rc.11) (2026-10-19)
+
+### Bug Fixes
+
+* run CI on ubuntu-26.04 runners (#17) ([62c6e57](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/62c6e571d5ccf4f554b5a17bcaef62b12f89c6d9))
+
+## [1.0.0-rc.10](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.9...v1.0.0-rc.10) (2026-10-15)
+
+### Features
+
+* align setup with atlas-agate-backend (A1A-340) (#16) ([5934613](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/5934613ac867d2c8bbf8529e9e8220973d741d5d)), closes [A1A-340](https://blw-ofag-ufag.atlassian.net/browse/A1A-340)
+
+## [1.0.0-rc.9](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.8...v1.0.0-rc.9) (2026-08-17)
+
+### Bug Fixes
+
+* **test:** align seed usernames to backslash-free brokered form (A1-189) (#13) ([dfaa3e5](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/dfaa3e54d0b2dd9d056c7b71e2489491f2ca2bbd)), closes [A1-189](https://blw-ofag-ufag.atlassian.net/browse/A1-189)
+
+## [1.0.0-rc.8](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.7...v1.0.0-rc.8) (2026-08-06)
+
+### Features
+
+* **soap:** expose getUsersByLoginId via REST for test automation (A1-172) (#11) ([8b82966](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/8b82966b9a3f6903ec60e050bb8daf184e4fe798)), closes [A1-172](https://blw-ofag-ufag.atlassian.net/browse/A1-172)
+
+## [1.0.0-rc.7](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.6...v1.0.0-rc.7) (2026-07-21)
+
+### Bug Fixes
+
+* **oidc-client:** attach mTLS config and harden startup against IdP outage (A1-113) (#10) ([d71c38d](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/d71c38df2f61873de4dd465ec178e3158e9b30de)), closes [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113)
+
+## [1.0.0-rc.6](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.5...v1.0.0-rc.6) (2026-07-14)
+
+### Features
+
+* **soap:** add Agate SOAP client and TVD user REST endpoint (A1-113) (#9) ([4f1d094](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/4f1d0941112e1d901336be85db9a34fa551e3ee6)), closes [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113) [A1-113](https://blw-ofag-ufag.atlassian.net/browse/A1-113)
+
+## [1.0.0-rc.5](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.4...v1.0.0-rc.5) (2026-06-03)
+
+### Features
+
+* **auth:** switches producer-info role prefix to agridata.ch A1-130 (#4) ([57366c8](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/57366c895c49dfe5e85fa1e4eb8ce19a27a72f01)), closes [A1-130](https://blw-ofag-ufag.atlassian.net/browse/A1-130)
+
+## [1.0.0-rc.4](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.3...v1.0.0-rc.4) (2026-04-27)
+
+### Features
+
+* **auth:** adds multi tenant support ([e2de07b](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/e2de07bd1586afd9a46f359a26f4716ce3bf1e2c))
+
+## [1.0.0-rc.3](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2026-04-21)
+
+### Bug Fixes
+
+* **cors:** fixes cors auth issue ([daef6fc](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/daef6fc92ac3dfcb3f8373775b7511e1113f3fd9))
+
+## [1.0.0-rc.2](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2026-04-21)
+
+### Features
+
+* **auth:** adds auth A1-41 ([4e58b4b](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/4e58b4bc5f75a24aeff002832414382224dc5ec2)), closes [A1-41](https://blw-ofag-ufag.atlassian.net/browse/A1-41)
+
+### Bug Fixes
+
+* **sonar:** fixes sonar issues A1-41 ([b126163](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/b1261631021c755150c67d500f30a0d3d271d808)), closes [A1-41](https://blw-ofag-ufag.atlassian.net/browse/A1-41)
+* **test:** trigger pipeline ([0f7f765](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/0f7f765075257a34ecf3e0ec58b1d9f6c8a9a13c))
+
 ## 1.0.0-rc.1 (2026-04-07)
 
 ### Features

@@ -5,6 +5,7 @@ permissions:
   pull-requests: write
   id-token: write
   issues: write
+  packages: read
 
 on:
   pull_request:
@@ -14,9 +15,10 @@ on:
   merge_group:
     branches: [ main, develop ]
 jobs:
-  # maps the branch to an environment and sets it as output for the rest of the workflow
+  # maps the branch to a GitHub environment name (dev, int). Empty for pull_request and merge_group runs,
+  # which then use repository-level secrets/variables only.
   set-env:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     outputs:
       environment: ${{ steps.map-branch-to-env.outputs.environment }}
 
@@ -34,22 +36,25 @@ jobs:
   # resolves environment specific variables like repository and sets them as output for the rest of the workflow.
   # this is only needed if the variables are not used directly but instead passed as input to a subworkflow
   resolve-env-vars:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs: set-env
     environment: ${{ needs.set-env.outputs.environment }}
     outputs:
       infrastructure_repo: ${{ steps.out.outputs.infrastructure_repo }}
+      deployment_app_id: ${{ steps.out.outputs.deployment_app_id }}
     steps:
       - id: out
         run: |
           echo "resolving environment specific variables for environment ${{ needs.set-env.outputs.environment }}"
           echo "infrastructure_repo=${{ vars.INFRASTRUCTURE_REPO }}"
           echo "infrastructure_repo=${{ vars.INFRASTRUCTURE_REPO }}" >> "$GITHUB_OUTPUT"
+          echo "deployment_app_id=${{ vars.DEPLOYMENT_APP_ID }}"
+          echo "deployment_app_id=${{ vars.DEPLOYMENT_APP_ID }}" >> "$GITHUB_OUTPUT"
 
 
   backend-workflow:
     name: "."
-    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/backend_workflow.yml@feature/disable-owasp
+    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/backend_workflow.yml@v1.9.1
     needs: [ set-env, resolve-env-vars ]
     secrets:
       GH_ORG_GITLEAKS_PRIVATE_KEY: ${{ secrets.GH_ORG_GITLEAKS_PRIVATE_KEY }}
@@ -59,15 +64,17 @@ jobs:
       AWS_DEPLOYMENT_ROLE_ARN: ${{ secrets.AWS_DEPLOYMENT_ROLE_ARN }}
       SEMVER_PRIVATE_KEY: ${{secrets.SEMVER_PRIVATE_KEY}}
       NIST_OWASP_API_KEY: ${{ secrets.NIST_OWASP_API_KEY }}
-      DEPLOYMENT_APP_PRIVATE_KEY: ${{ secrets.PC_CORE_BLW_AGATE_DEV_DEPLOY_PRIVATE_KEY }}
+      DEPLOYMENT_APP_PRIVATE_KEY: ${{ secrets.DEPLOYMENT_APP_PRIVATE_KEY }}
     with:
       environment: ${{ needs.set-env.outputs.environment }}
       semver-app-id: ${{vars.SEMVER_APP_ID}}
       gitleaks-app-id: ${{ vars.GH_ORG_GITLEAKS_APP_ID }}
       aws-region: ${{ vars.AWS_REGION }}
       ecr-repository-name: 'agate-test-backend'
-      deployment-app-id: ${{ vars.PC_CORE_BLW_AGATE_DEV_DEPLOY_APP_ID}}
-      application-name: 'agate-test-backend'
+      deployment-app-id: ${{ needs.resolve-env-vars.outputs.deployment_app_id }}
+      application-name: 'agate_test_backend'
       infrastructure_repo: ${{ needs.resolve-env-vars.outputs.infrastructure_repo }}
       github-organization: 'blw-ofag-ufag'
       enable-owasp-check: false
+      # Assumed directly, without role chaining (ADR-1005).
+      ecr-pull-role-arn: "arn:aws:iam::681832766879:role/agate-ecr-pull-role"
