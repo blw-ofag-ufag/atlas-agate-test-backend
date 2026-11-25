@@ -54,7 +54,7 @@ jobs:
 
   backend-workflow:
     name: "."
-    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/backend_workflow.yml@v1.9.0
+    uses: blw-ofag-ufag/atlas-code-github-workflows/.github/workflows/backend_workflow.yml@v1.9.1
     needs: [ set-env, resolve-env-vars ]
     secrets:
       GH_ORG_GITLEAKS_PRIVATE_KEY: ${{ secrets.GH_ORG_GITLEAKS_PRIVATE_KEY }}
