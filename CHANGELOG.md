@@ -1,3 +1,15 @@
+## [1.0.0-rc.16](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.15...v1.0.0-rc.16) (2026-11-25)
+
+### Bug Fixes
+
+* **deps:** update blw-ofag-ufag/atlas-code-github-workflows action to v1.9.0 ([705a45e](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/705a45ee359b87beb66086c9dcec7e8a644a1ab1))
+
+## [1.0.0-rc.15](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.14...v1.0.0-rc.15) (2026-11-25)
+
+### Bug Fixes
+
+* **deps:** update group-update [security] ([c14f50d](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/commit/c14f50d2982cf5d568bccb8c074c5bfaa315bb96))
+
 ## [1.0.0-rc.14](https://github.com/blw-ofag-ufag/atlas-agate-test-backend/compare/v1.0.0-rc.13...v1.0.0-rc.14) (2026-11-24)
 
 ### Features
